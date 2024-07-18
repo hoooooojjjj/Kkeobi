@@ -5,6 +5,7 @@ const ChatComponent = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
   const [thread, setThread] = useState("");
+  const [response, setResponse] = useState("");
 
   const handleCreateThread = async () => {
     try {
@@ -30,7 +31,8 @@ const ChatComponent = () => {
         content,
         threadID: thread,
       });
-      console.log("Message sent:", response);
+      console.log("Message sent:", response.data.response.answer);
+      setResponse(response.data.response.answer);
     } catch (error) {
       console.error("Failed to send message:", error);
     }
@@ -38,23 +40,25 @@ const ChatComponent = () => {
 
   return (
     <div>
-      <h2>Create Thread</h2>
+      <h2>대화 시작하기</h2>
       <input
         type="text"
         placeholder="Image URL"
         value={imageUrl}
         onChange={(e) => setImageUrl(e.target.value)}
       />
-      <button onClick={handleCreateThread}>Create Thread</button>
+      <button onClick={handleCreateThread}>시작</button>
 
-      <h2>Send Message</h2>
+      <h2>메세지 보내기</h2>
       <input
         type="text"
         placeholder="Content"
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <button onClick={handleSendMessage}>Send Message</button>
+      <button onClick={handleSendMessage}>보내기</button>
+
+      <p>답변 : {response ? response : "잠시간 기다려주세요"}</p>
     </div>
   );
 };

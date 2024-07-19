@@ -1,9 +1,9 @@
-import ChatComponent from "./OpenAI";
+import Router from "./component/Router";
 
 function App() {
   return (
-    <div className="App">
-      <ChatComponent />
+    <div>
+      <Router />
     </div>
   );
 }

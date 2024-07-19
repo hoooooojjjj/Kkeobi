@@ -1,11 +1,10 @@
 {
-	"folders": [
-		{
-			"path": "../../sesacton_server"
-		},
-		{
-			"path": ".."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../sesacton_server"
+    }
+  ]
 }

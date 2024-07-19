@@ -5,17 +5,24 @@ const ChatComponent = () => {
   // 사용자가 업로드한 이미지 URL
   const [imageUrl, setImageUrl] = useState("");
 
+  // 채팅 시작 여부
+  const [isChatStarted, setIsChatStarted] = useState(false);
+
   // 사용자가 입력한 메세지
   const [content, setContent] = useState("");
 
   // 대화 스레드 ID
   const [thread, setThread] = useState("");
 
+  // 사용자가 입력한 질문
+  const [question, setQuestion] = useState([]);
+
   // OpenAI로부터 받은 답변
-  const [response, setResponse] = useState("");
+  const [answer, setAnswer] = useState([]);
 
   // 대화 스레드 생성 시
   const handleCreateThread = async () => {
+    setIsChatStarted(true);
     try {
       // '/chat' 엔드포인트로 POST 요청(이미지 URL 전송 후 대화 스레드 생성)
       const response = await axios.post("http://localhost:8080/chat", {
@@ -24,12 +31,12 @@ const ChatComponent = () => {
       // '/chat' 요청에서 응답으로 받은 thread id 값을 상태에 저장
       setThread(response.data.thread);
       // '/chat' 요청에서 받은 답변을 상태에 저장
-      setResponse(response.data.response.answer);
+      setAnswer([...answer, response.data.response.answer]);
 
       // 콘솔에 thread id 출력
       console.log("Thread created! Thread id :", response.data.thread);
       // 콘솔에 '/chat' 요청에서 받은 답변 출력
-      console.log("first response : ", response.data.thread);
+      console.log("first response : ", response.data.response.answer);
     } catch (error) {
       // 에러 발생 시 콘솔에 에러 출력
       console.error("Failed to create thread : ", error);
@@ -38,6 +45,9 @@ const ChatComponent = () => {
 
   // 메세지 전송 시
   const handleSendMessage = async () => {
+    // 질문 저장
+    setQuestion([...question, content]);
+
     // 스레드 id가 생성된 스레드와 일치하는지 확인 용 콘솔
     console.log("thread:", thread);
 
@@ -59,11 +69,12 @@ const ChatComponent = () => {
         response.data.response.answer
       );
       // '/chat/message' 요청에서 받은 답변을 상태에 저장
-      setResponse(response.data.response.answer);
+      setAnswer([...answer, response.data.response.answer]);
     } catch (error) {
       // 에러 발생 시 콘솔에 에러 출력
       console.error("Failed to send response : ", error);
     }
+    setContent("");
   };
 
   return (
@@ -86,7 +97,18 @@ const ChatComponent = () => {
       />
       <button onClick={handleSendMessage}>보내기</button>
 
-      <p>답변 : {response ? response : "잠시간 기다려주세요"}</p>
+      <h2>질문과 답변</h2>
+      {isChatStarted ? "채팅이 시작되었습니다. 잠시만 기다려주세요" : ""}
+      <p>답변 : {answer[0]}</p>
+      {question.map((q, index) => (
+        <div key={index}>
+          <p>질문: {q}</p>
+          <p>
+            답변:{" "}
+            {answer[index + 1] ? answer[index + 1] : "잠시간 기다려주세요"}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };

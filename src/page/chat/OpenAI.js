@@ -35,7 +35,7 @@ const ChatComponent = () => {
   // 대화 스레드 생성 시
   const handleCreateThread = async () => {
     // 참조 만들기
-    const storageRef = ref(storage, `billImg/${userObj.uid}`);
+    const storageRef = ref(storage, `billImg/${userObj.uid}/${imgFile.name}`);
 
     // 파일 업로드
     await uploadBytes(storageRef, imgFile);

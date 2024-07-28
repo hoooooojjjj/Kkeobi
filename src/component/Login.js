@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { auth } from "../../firebase";
-import { userObjContext } from "../../App";
+import { auth } from "../firebase";
+import { userObjContext } from "../App";
+import { GoogleLoginImg } from "../page/main/MainStyle";
+import { useNavigate } from "react-router-dom";
 function Login() {
   // 유저 정보
   const userObj = useContext(userObjContext);
+
+  const nav = useNavigate();
 
   // 구글 로그인
   const handleGoogleLogin = () => {
@@ -16,7 +20,6 @@ function Login() {
         // const token = credential.accessToken;
 
         const user = result.user;
-        console.log(user);
       })
       .catch((error) => {
         console.log(error);
@@ -36,7 +39,11 @@ function Login() {
 
   return (
     <div>
-      <button onClick={handleGoogleLogin}>구글로 로그인하기</button>
+      <GoogleLoginImg
+        onClick={handleGoogleLogin}
+        src={process.env.PUBLIC_URL + `/assets/google.png`}
+        alt="구글 로그인"
+      />
       <button onClick={handleLogout}>로그아웃</button>
     </div>
   );

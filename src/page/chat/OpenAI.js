@@ -46,9 +46,12 @@ const ChatComponent = () => {
     setIsChatStarted(true);
     try {
       // '/chat' 엔드포인트로 POST 요청(이미지 URL 전송 후 대화 스레드 생성)
-      const response = await axios.post("http://localhost:8080/chat", {
-        imageUrl: url,
-      });
+      const response = await axios.post(
+        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat",
+        {
+          imageUrl: url,
+        }
+      );
       // '/chat' 요청에서 응답으로 받은 thread id 값을 상태에 저장
       setThread(response.data.thread);
       // '/chat' 요청에서 받은 답변을 상태에 저장
@@ -76,11 +79,14 @@ const ChatComponent = () => {
     }
     try {
       // '/chat/message' 엔드포인트로 POST 요청(이미지 URL, 메세지 내용, 스레드 id 전송 후 메세지 전송)
-      const response = await axios.post("http://localhost:8080/chat/message", {
-        // imageUrl,
-        content,
-        threadID: thread,
-      });
+      const response = await axios.post(
+        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat/message",
+        {
+          // imageUrl,
+          content,
+          threadID: thread,
+        }
+      );
       // 콘솔에 '/chat/message' 요청에서 받은 답변 출력
       console.log(
         `sending response in ${thread} : `,

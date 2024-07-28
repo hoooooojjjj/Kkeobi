@@ -19,7 +19,7 @@ function Main() {
   return (
     <ContainerStyle>
       <Header>
-        <HeaderGreeting>{userObj.displayName}</HeaderGreeting>
+        <HeaderGreeting>{userObj && userObj.displayName}</HeaderGreeting>
         <GoMyPageBtn>내 장독대 관리하기</GoMyPageBtn>
       </Header>
       <Mains>

@@ -20,7 +20,7 @@ function App() {
   }, []);
   return (
     <>
-      <userObjContext.Provider value={userObj}>
+      <userObjContext.Provider value={[userObj, setUserObj]}>
         <Router />
       </userObjContext.Provider>
     </>

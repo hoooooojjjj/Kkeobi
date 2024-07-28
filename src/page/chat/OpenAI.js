@@ -6,7 +6,7 @@ import { storage } from "../../firebase";
 
 const ChatComponent = () => {
   // 유저 정보
-  const userObj = useContext(userObjContext);
+  const [userObj, setUserObj] = useContext(userObjContext);
 
   // 사용자가 업로드한 이미지 파일
   const [imgFile, setimgFile] = useState();

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 function Login() {
   // 유저 정보
-  const userObj = useContext(userObjContext);
+  const [userObj, setUserObj] = useContext(userObjContext);
 
   const nav = useNavigate();
 
@@ -23,7 +23,6 @@ function Login() {
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
-          console.log("이미 로그인한 유저입니다:", userSnap.data());
         } else {
           // Firestore에 유저 정보 저장
           await setDoc(userRef, {
@@ -32,7 +31,7 @@ function Login() {
             displayName: user.displayName,
             accessToken: user.accessToken,
           });
-          console.log("새로운 유저입니다. 유저 정보가 저장되었습니다.");
+          nav("/userinfo");
         }
       })
       .catch((error) => {
@@ -46,21 +45,21 @@ function Login() {
       .then(() => {
         // Sign-out successful.
         console.log("로그아웃 성공");
+        setUserObj(null);
       })
       .catch((error) => {
         // An error happened.
       });
   };
 
-  return (
-    <div>
-      <GoogleLoginImg
-        onClick={handleGoogleLogin}
-        src={process.env.PUBLIC_URL + `/assets/google.png`}
-        alt="구글 로그인"
-      />
-      <button onClick={handleLogout}>로그아웃</button>
-    </div>
+  return userObj ? (
+    <button onClick={handleLogout}>로그아웃</button>
+  ) : (
+    <GoogleLoginImg
+      onClick={handleGoogleLogin}
+      src={process.env.PUBLIC_URL + `/assets/google.png`}
+      alt="구글 로그인"
+    />
   );
 }
 

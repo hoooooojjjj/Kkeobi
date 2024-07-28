@@ -13,6 +13,8 @@ import {
   NoneSelectBtnText,
   DetailStandard,
   ChatBox,
+  SubmitBtn,
+  SubmitBtnText,
 } from "./UserInfoStyle";
 
 function UserInfo() {
@@ -59,20 +61,29 @@ function UserInfo() {
             <ChatContentWrap>
               <ChatContentText>
                 다음 중 000님이 해당되는 사항을 모두 선택해주세요.
-                (대가족요금/생명유지장치)
+                (복지할인요금)
               </ChatContentText>
               <InfoSelectBtnWrap>
                 <InfoSelectBtn>
-                  <InfoSelectBtnText>5인 이상 가구</InfoSelectBtnText>
+                  <InfoSelectBtnText>장애인</InfoSelectBtnText>
                 </InfoSelectBtn>
                 <InfoSelectBtn>
-                  <InfoSelectBtnText>출산 가구</InfoSelectBtnText>
+                  <InfoSelectBtnText>국가 유공자</InfoSelectBtnText>
                 </InfoSelectBtn>
                 <InfoSelectBtn>
-                  <InfoSelectBtnText>3자녀 이상 가구</InfoSelectBtnText>
+                  <InfoSelectBtnText>상이 유공자</InfoSelectBtnText>
                 </InfoSelectBtn>
                 <InfoSelectBtn>
-                  <InfoSelectBtnText>생명 유지 장치</InfoSelectBtnText>
+                  <InfoSelectBtnText>독립 유공자</InfoSelectBtnText>
+                </InfoSelectBtn>
+                <InfoSelectBtn>
+                  <InfoSelectBtnText>기초생활 (생계, 의료)</InfoSelectBtnText>
+                </InfoSelectBtn>
+                <InfoSelectBtn>
+                  <InfoSelectBtnText>기초생활 (주거, 교육)</InfoSelectBtnText>
+                </InfoSelectBtn>
+                <InfoSelectBtn>
+                  <InfoSelectBtnText>차상위계층</InfoSelectBtnText>
                 </InfoSelectBtn>
                 <NoneSelectBtn>
                   <NoneSelectBtnText>해당 없음</NoneSelectBtnText>
@@ -82,6 +93,9 @@ function UserInfo() {
           </ChatWrap>
           <DetailStandard>자세한 기준 보기</DetailStandard>
         </ChatBox>
+        <SubmitBtn>
+          <SubmitBtnText>제출하기</SubmitBtnText>
+        </SubmitBtn>
       </ChatRoom>
     </ContainerStyle>
   );

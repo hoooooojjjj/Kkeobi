@@ -7,6 +7,8 @@ export const Header = styled.header({
 
 // 채팅방
 export const ChatRoom = styled.div({
+  height: 470,
+  padding: 10,
   display: "flex",
   flexDirection: "column",
   overflowY: "scroll",
@@ -119,4 +121,31 @@ export const DetailStandard = styled.div({
   fontSize: 12,
   color: "#787878",
   marginTop: 10,
+});
+
+// sumbit 버튼
+export const SubmitBtn = styled.button({
+  width: 340,
+  alignSelf: "stretch",
+  flex: "1 1 0",
+  paddingLeft: 91,
+  paddingRight: 91,
+  paddingTop: 8,
+  paddingBottom: 8,
+  background: "#4753FF",
+  borderRadius: 10,
+  border: "1.12px #787878 solid",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 10,
+  display: "inline-flex",
+});
+
+// sumbit 버튼 텍스트
+export const SubmitBtnText = styled.div({
+  color: "white",
+  fontSize: 16,
+  fontFamily: "Inter",
+  fontWeight: "500",
+  wordWrap: "break-word",
 });

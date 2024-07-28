@@ -73,6 +73,11 @@ export const InfoSelectBtn = styled.div({
   paddingTop: 8,
   paddingBottom: 8,
   background: "white",
+  color: "#4753FF",
+  "&:hover": {
+    background: "#4753FF",
+    color: "white",
+  },
   borderRadius: 10,
   border: "1.12px #4753FF solid",
   justifyContent: "center",
@@ -83,7 +88,6 @@ export const InfoSelectBtn = styled.div({
 
 // 정보 선택 버튼 텍스트
 export const InfoSelectBtnText = styled.div({
-  color: "#4753FF",
   fontSize: 16,
   fontFamily: "Inter",
   fontWeight: "500",
@@ -99,6 +103,11 @@ export const NoneSelectBtn = styled.div({
   paddingTop: 8,
   paddingBottom: 8,
   background: "white",
+  color: "#787878",
+  "&:hover": {
+    color: "white",
+    background: "#787878",
+  },
   borderRadius: 10,
   border: "1.12px #787878 solid",
   justifyContent: "center",
@@ -109,7 +118,6 @@ export const NoneSelectBtn = styled.div({
 
 // 해당 없음 버튼 텍스트
 export const NoneSelectBtnText = styled.div({
-  color: "#787878",
   fontSize: 16,
   fontFamily: "Inter",
   fontWeight: "500",

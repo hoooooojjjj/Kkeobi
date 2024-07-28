@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ContainerStyle } from "../../containerStyle";
 import {
   GoMyPageBtn,
@@ -11,12 +11,15 @@ import {
   QuestionBtn,
 } from "./MainStyle";
 import Login from "../../component/Login";
+import { userObjContext } from "../../App";
 
 function Main() {
+  // 유저 정보
+  const [userObj, setUserObj] = useContext(userObjContext);
   return (
     <ContainerStyle>
       <Header>
-        <HeaderGreeting>홍길동님 반갑습니다</HeaderGreeting>
+        <HeaderGreeting>{userObj.displayName}</HeaderGreeting>
         <GoMyPageBtn>내 장독대 관리하기</GoMyPageBtn>
       </Header>
       <Mains>

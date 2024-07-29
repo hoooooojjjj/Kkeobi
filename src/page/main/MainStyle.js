@@ -30,6 +30,7 @@ export const BackBtn = styled.button((props) => ({
 export const Mains = styled.main((props) => ({
   width: 375,
   height: props.isChatRoomExpanded ? 600 : 380,
+  overflow: "scroll",
   boxSizing: "border-box",
   paddingLeft: 15,
   paddingRight: 15,
@@ -85,6 +86,15 @@ export const FirstChat = styled.div({
   wordWrap: "break-word",
 });
 
+// 하나의 채팅 뭉치 wrap
+export const OneChatWrap = styled.div({
+  flexDirection: "column",
+  // justifyContent: "flex-start",
+  alignItems: "center",
+  gap: 15,
+  display: "flex",
+});
+
 // 내 채팅 wrap
 export const MyChatWrap = styled.div({
   alignSelf: "flex-end",
@@ -103,6 +113,7 @@ export const MyChatWrap = styled.div({
 // 내 채팅
 export const MyChat = styled.div({
   color: "black",
+  maxWidth: 250,
   fontSize: 15,
   fontFamily: "Inter",
   fontWeight: "400",
@@ -126,6 +137,7 @@ export const KkeobiChatWrap = styled.div({
 
 // 꺼비 채팅
 export const KkeobiChat = styled.div({
+  maxWidth: 250,
   color: "white",
   fontSize: 15,
   fontFamily: "Inter",

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { userObjContext } from "../App";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -20,15 +20,18 @@ import {
   MessageInputWrap,
   StyledLabel,
   PendingAnswer,
+  OneChatWrap,
 } from "../page/main/MainStyle";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { useQuery } from "@tanstack/react-query";
+import { Spin } from "antd";
 
 const getChatLog = async (userObj) => {
   const docRef = doc(db, "chatLog", userObj.uid);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
+    return docSnap.data();
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
@@ -67,7 +70,7 @@ const ChatComponent = ({
   const [imgFile, setimgFile] = useState();
 
   // 답변 왔는지 여부
-  const [isPending, setIsPending] = useState(false);
+  const [isAnswerPending, setIsAnswerPending] = useState(false);
 
   // 사용자가 입력한 메세지
   const [content, setContent] = useState("");
@@ -85,9 +88,15 @@ const ChatComponent = ({
   //   setimgFile(e.target.files[0]);
   // };
 
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: [userObj.uid + "'s chatLog"],
+    queryFn: () => getChatLog(userObj),
+  });
+  console.log(data);
+
   // 대화 스레드 생성 시
   const handleCreateThread = async (e) => {
-    setIsPending(true);
+    setIsAnswerPending(true);
     // 참조 만들기
     const storageRef = ref(
       storage,
@@ -118,7 +127,7 @@ const ChatComponent = ({
         { question: url, answer: response.data.response.answer },
       ]);
 
-      setIsPending(false);
+      setIsAnswerPending(false);
 
       insertChatLog(userObj, {
         question: url,
@@ -139,7 +148,7 @@ const ChatComponent = ({
 
   // 메세지 전송 시
   const handleSendMessage = async () => {
-    setIsPending(true);
+    setIsAnswerPending(true);
     // 스레드 id가 생성된 스레드와 일치하는지 확인 용 콘솔
     console.log("thread:", thread);
     // 스레드가 없을 경우 콘솔에 출력
@@ -169,7 +178,7 @@ const ChatComponent = ({
         { question: content, answer: response.data.response.answer },
       ]);
 
-      setIsPending(false);
+      setIsAnswerPending(false);
 
       insertChatLog(userObj, {
         question: content,
@@ -208,19 +217,24 @@ const ChatComponent = ({
             질문하기
           </QuestionBtn>
         </div>
-        {ChatLog.map((Chat, index) => (
-          <div>
-            <MyChatWrap>
-              <MyChat>{Chat.question}</MyChat>
-            </MyChatWrap>
-            <KkeobiChatWrap>
-              <KkeobiChat>{Chat.answer}</KkeobiChat>
-            </KkeobiChatWrap>
-          </div>
-        ))}
         {isPending ? (
+          <Spin />
+        ) : (
+          data &&
+          data.content.map((Chat, index) => (
+            <OneChatWrap>
+              <MyChatWrap>
+                <MyChat>{Chat.question}</MyChat>
+              </MyChatWrap>
+              <KkeobiChatWrap>
+                <KkeobiChat>{Chat.answer}</KkeobiChat>
+              </KkeobiChatWrap>
+            </OneChatWrap>
+          ))
+        )}
+        {isAnswerPending ? (
           <KkeobiChatWrap>
-            <PendingAnswer answerLoaded={!isPending}>
+            <PendingAnswer answerLoaded={!isAnswerPending}>
               <span></span>
               <span></span>
               <span></span>

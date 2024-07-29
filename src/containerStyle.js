@@ -6,4 +6,5 @@ export const ContainerStyle = styled.div({
   border: "1px solid black",
   margin: "0 auto",
   marginTop: 20,
+  position: "relative",
 });

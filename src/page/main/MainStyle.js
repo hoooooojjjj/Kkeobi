@@ -30,7 +30,7 @@ export const BackBtn = styled.button((props) => ({
 export const Mains = styled.main((props) => ({
   width: 375,
   height: props.isChatRoomExpanded ? 600 : 380,
-  overflow: "scroll",
+  overflowY: "auto",
   boxSizing: "border-box",
   paddingLeft: 15,
   paddingRight: 15,
@@ -43,8 +43,10 @@ export const Mains = styled.main((props) => ({
   alignItems: "flex-start",
   gap: 10,
   display: "inline-flex",
+  flexDirection: "column",
   position: "relative",
   transition: "height 0.5s ease-in-out", // Add transition property for smooth animation
+  paddingBottom: props.isChatRoomExpanded ? 80 : 20,
 }));
 
 // 메인 로고
@@ -154,11 +156,15 @@ export const QuestionBtn = styled.button({});
 // 메시지 input wrap
 export const MessageInputWrap = styled.div({
   position: "absolute",
-  bottom: 10,
-  width: "90%",
+  left: 0,
+  bottom: 0,
+  backgroundColor: "lightGray",
+  padding: 5,
+  width: "97%",
   justifyContent: "center",
   alignItems: "center",
   display: "inline-flex",
+  zIndex: 9999, // Add a higher z-index value to make sure it stays on top
 });
 
 export const StyledLabel = styled.label`

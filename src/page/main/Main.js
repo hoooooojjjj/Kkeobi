@@ -1,21 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ContainerStyle } from "../../containerStyle";
-import {
-  GoMyPageBtn,
-  Header,
-  HeaderGreeting,
-  Mains,
-  ChatRoom,
-  FirstChatWrap,
-  FirstChat,
-  BillAnalysisBtn,
-  QuestionBtn,
-  MyChatWrap,
-  MyChat,
-  KkeobiChatWrap,
-  KkeobiChat,
-  MainLogo,
-} from "./MainStyle";
+import { GoMyPageBtn, Header, HeaderGreeting } from "./MainStyle";
 import Login from "../../component/Login";
 import { userObjContext } from "../../App";
 import { Spin } from "antd";

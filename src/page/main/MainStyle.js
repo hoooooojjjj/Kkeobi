@@ -1,18 +1,28 @@
 import styled from "@emotion/styled";
 
 // 헤더
-export const Header = styled.header((props) => ({
-  display: props.hidden ? "none" : "flex",
-  height: props.isChatRoomExpanded ? 0 : 180,
-  justifyContent: "space-evenly",
-  transition: props.isChatRoomExpanded ? "height 0.5s ease-in-out" : "none",
-}));
+
+export const Header = styled.header`
+  display: flex;
+  visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
+  height: ${(props) => (props.isChatRoomExpanded ? 0 : 180)}px;
+  justify-content: space-evenly;
+  transition: height 0.5s ease-in-out;
+`;
 
 // 헤더 인사
 export const HeaderGreeting = styled.p({});
 
 // 헤더 내 장독대 관리하기 버튼
 export const GoMyPageBtn = styled.div({});
+
+export const BackBtn = styled.button((props) => ({
+  display: props.hidden ? "block" : "none",
+  transition: "display 0.5s ease-in-out",
+  position: "absolute",
+  top: 10,
+  left: 20,
+}));
 
 // 메인
 export const Mains = styled.main((props) => ({

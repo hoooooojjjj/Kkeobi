@@ -35,11 +35,11 @@ function Main() {
 
   useEffect(() => {
     if (isChatRoomExpanded) {
-      // 트랜지션 후 display: none 설정
+      // isChatRoomExpanded가 true가 되면 height를 0으로 트랜지션하고, 트랜지션 후 display: none 설정
       const timeout = setTimeout(() => setHidden(true), 500);
       return () => clearTimeout(timeout);
     } else {
-      // 트랜지션 전에 display: flex 설정
+      // isChatRoomExpanded가 false가 되면 display를 flex로 설정하고 height를 180으로 트랜지션
       setHidden(false);
     }
   }, [isChatRoomExpanded]);
@@ -60,6 +60,8 @@ function Main() {
       <ChatComponent
         isChatRoomExpanded={isChatRoomExpanded}
         setIsChatRoomExpanded={setIsChatRoomExpanded}
+        hidden={hidden}
+        setHidden={setHidden}
       />
       <Login isChatRoomExpanded={isChatRoomExpanded} />
     </ContainerStyle>

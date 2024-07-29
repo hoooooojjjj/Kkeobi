@@ -15,9 +15,14 @@ import {
   KkeobiChatWrap,
   KkeobiChat,
   MainLogo,
+  BackBtn,
 } from "../page/main/MainStyle";
 
-const ChatComponent = ({ isChatRoomExpanded, setIsChatRoomExpanded }) => {
+const ChatComponent = ({
+  isChatRoomExpanded,
+  setIsChatRoomExpanded,
+  hidden,
+}) => {
   // 유저 정보
   const { data } = useContext(userObjContext);
 
@@ -145,6 +150,9 @@ const ChatComponent = ({ isChatRoomExpanded, setIsChatRoomExpanded }) => {
     // </div>
     <Mains isChatRoomExpanded={isChatRoomExpanded}>
       <MainLogo src={process.env.PUBLIC_URL + `/assets/Logo.png`} />
+      <BackBtn hidden={hidden} onClick={() => setIsChatRoomExpanded(false)}>
+        뒤로가기
+      </BackBtn>
       <ChatRoom>
         <FirstChatWrap>
           <FirstChat>안녕하세요, 꺼비입니다! 무엇을 도와드릴까요?</FirstChat>

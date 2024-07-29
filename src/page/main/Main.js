@@ -12,14 +12,23 @@ import {
 } from "./MainStyle";
 import Login from "../../component/Login";
 import { userObjContext } from "../../App";
+import { Spin } from "antd";
 
 function Main() {
   // 유저 정보
-  const [userObj, setUserObj] = useContext(userObjContext);
+  const { data, isPending } = useContext(userObjContext);
+
+  if (isPending) {
+    return (
+      <ContainerStyle>
+        <Spin />
+      </ContainerStyle>
+    );
+  }
   return (
     <ContainerStyle>
       <Header>
-        <HeaderGreeting>{userObj && userObj.displayName}</HeaderGreeting>
+        <HeaderGreeting>{data && data.displayName}</HeaderGreeting>
         <GoMyPageBtn>내 장독대 관리하기</GoMyPageBtn>
       </Header>
       <Mains>

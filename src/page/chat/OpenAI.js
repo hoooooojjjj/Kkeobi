@@ -6,7 +6,7 @@ import { storage } from "../../firebase";
 
 const ChatComponent = () => {
   // 유저 정보
-  const [userObj, setUserObj] = useContext(userObjContext);
+  const { data } = useContext(userObjContext);
 
   // 사용자가 업로드한 이미지 파일
   const [imgFile, setimgFile] = useState();
@@ -35,7 +35,7 @@ const ChatComponent = () => {
   // 대화 스레드 생성 시
   const handleCreateThread = async () => {
     // 참조 만들기
-    const storageRef = ref(storage, `billImg/${userObj.uid}/${imgFile.name}`);
+    const storageRef = ref(storage, `billImg/${data.uid}/${imgFile.name}`);
 
     // 파일 업로드
     await uploadBytes(storageRef, imgFile);

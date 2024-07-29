@@ -1,21 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { userObjContext } from "../App";
+import { getUser, userObjContext } from "../App";
 import { GoogleLoginImg } from "../page/main/MainStyle";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 function Login() {
   // 유저 정보
-  const [userObj, setUserObj] = useContext(userObjContext);
+  const { data } = useContext(userObjContext);
 
   const nav = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  // 유저 정보 변경 시 다시 fetch
+  const mutation = useMutation({
+    mutationFn: getUser,
+    // 성공되었을 때
+    onSuccess: () => {
+      // 유저 정보 다시 fetch
+      queryClient.invalidateQueries("getUser");
+    },
+    // 에러 발생 시
+    onError: (error) => {
+      console.error("Error deleting item:", error.message);
+    },
+  });
 
   // 구글 로그인
   const handleGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(async (result) => {
+        // 로그인 성공 시 유저 정보 다시 fetch
+        mutation.mutate();
+
         const user = result.user;
 
         // 유저 정보 Firestore에서 확인
@@ -45,14 +66,15 @@ function Login() {
       .then(() => {
         // Sign-out successful.
         console.log("로그아웃 성공");
-        setUserObj(null);
+        // 로그아웃 성공 시 유저 정보 다시 fetch
+        mutation.mutate();
       })
       .catch((error) => {
         // An error happened.
       });
   };
 
-  return userObj ? (
+  return data ? (
     <button onClick={handleLogout}>로그아웃</button>
   ) : (
     <GoogleLoginImg

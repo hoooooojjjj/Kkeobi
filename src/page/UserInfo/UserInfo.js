@@ -25,7 +25,7 @@ function UserInfo() {
   const nav = useNavigate();
 
   // 유저 정보
-  const [userObj, setUserObj] = useContext(userObjContext);
+  const { data } = useContext(userObjContext);
 
   // 사용자 정보
   const [userInfo, setUserInfo] = useState({
@@ -74,7 +74,7 @@ function UserInfo() {
   // 사용자 정보 제출 시
   const handleSubmitUserInfo = async () => {
     // 사용자 정보 Firestore에 저장
-    await setDoc(doc(db, "userInfo", userObj.uid), userInfo);
+    await setDoc(doc(db, "userInfo", data.uid), userInfo);
     nav("/");
   };
   return (
@@ -83,8 +83,8 @@ function UserInfo() {
       <ChatRoom>
         <ChatWrap>
           <ChatContentWrap>
-            안녕하세요, {userObj && userObj.displayName}님. 회원 가입을
-            축하합니다!🥳 맞춤형 관리를 위해 우선 몇 가지 질문을 하겠습니다.
+            안녕하세요, {data && data.displayName}님. 회원 가입을 축하합니다!🥳
+            맞춤형 관리를 위해 우선 몇 가지 질문을 하겠습니다.
           </ChatContentWrap>
         </ChatWrap>
         <ChatBox>

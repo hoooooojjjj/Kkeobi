@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ContainerStyle } from "../../containerStyle";
 import {
   GoMyPageBtn,
@@ -20,11 +20,29 @@ import Login from "../../component/Login";
 import { userObjContext } from "../../App";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import ChatComponent from "../../component/OpenAI";
 
 function Main() {
   const nav = useNavigate();
+
   // 유저 정보
   const { data, isPending } = useContext(userObjContext);
+
+  // 채팅방 확대 여부
+  const [isChatRoomExpanded, setIsChatRoomExpanded] = useState(false);
+
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    if (isChatRoomExpanded) {
+      // 트랜지션 후 display: none 설정
+      const timeout = setTimeout(() => setHidden(true), 500);
+      return () => clearTimeout(timeout);
+    } else {
+      // 트랜지션 전에 display: flex 설정
+      setHidden(false);
+    }
+  }, [isChatRoomExpanded]);
 
   if (isPending) {
     return (
@@ -35,49 +53,20 @@ function Main() {
   }
   return data ? (
     <ContainerStyle>
-      <Header>
+      <Header isChatRoomExpanded={isChatRoomExpanded} hidden={hidden}>
         <HeaderGreeting>{data.displayName}</HeaderGreeting>
         <GoMyPageBtn>내 장독대 관리하기</GoMyPageBtn>
       </Header>
-      <Mains>
-        <MainLogo src={process.env.PUBLIC_URL + `/assets/Logo.png`} />
-        <ChatRoom>
-          <FirstChatWrap>
-            <FirstChat>안녕하세요, 꺼비입니다! 무엇을 도와드릴까요?</FirstChat>
-          </FirstChatWrap>
-          <div>
-            <BillAnalysisBtn>내 고지서 분석</BillAnalysisBtn>
-            <QuestionBtn>질문하기</QuestionBtn>
-          </div>
-          <MyChatWrap>
-            <MyChat>기후환경요금이 무슨 뜻이야?</MyChat>
-          </MyChatWrap>
-          <KkeobiChatWrap>
-            <KkeobiChat>
-              기후환경요금에 대해 설명해드릴게요!☺️ 깨끗하고 안전한 에너지
-              제공에 소요되는 비용으로, "기후환경요금 단가*사용전력량"로
-              계산해요. 2024년 0월 00일 기준 기후환경요금 단가는 9원입니다.더
-              자세한 정보를 알고 싶다면 말해주세요!☺️
-            </KkeobiChat>
-          </KkeobiChatWrap>
-        </ChatRoom>
-      </Mains>
-      <Login />
+      <ChatComponent
+        isChatRoomExpanded={isChatRoomExpanded}
+        setIsChatRoomExpanded={setIsChatRoomExpanded}
+      />
+      <Login isChatRoomExpanded={isChatRoomExpanded} />
     </ContainerStyle>
   ) : (
     <ContainerStyle>
       <Header></Header>
-      {/* <Mains>
-        <MainGreeting>
-          안녕하세요, 꺼비입니다! 무엇을 도와드릴까요?
-        </MainGreeting>
-        <MainBtnWrap>
-          <BillAnalysisBtn onClick={() => nav("/chat")}>
-            고지서 분석하기
-          </BillAnalysisBtn>
-          <QuestionBtn onClick={() => nav("/chat")}>질문하기</QuestionBtn>
-        </MainBtnWrap>
-      </Mains> */}
+      {/* <ChatComponent /> */}
       <Login />
     </ContainerStyle>
   );

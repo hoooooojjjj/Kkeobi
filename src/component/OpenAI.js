@@ -1,10 +1,23 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { userObjContext } from "../../App";
+import { userObjContext } from "../App";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../../firebase";
+import { storage } from "../firebase";
+import {
+  Mains,
+  ChatRoom,
+  FirstChatWrap,
+  FirstChat,
+  BillAnalysisBtn,
+  QuestionBtn,
+  MyChatWrap,
+  MyChat,
+  KkeobiChatWrap,
+  KkeobiChat,
+  MainLogo,
+} from "../page/main/MainStyle";
 
-const ChatComponent = () => {
+const ChatComponent = ({ isChatRoomExpanded, setIsChatRoomExpanded }) => {
   // 유저 정보
   const { data } = useContext(userObjContext);
 
@@ -103,33 +116,60 @@ const ChatComponent = () => {
   };
 
   return (
-    <div>
-      <h2>대화 시작하기</h2>
-      <input type="file" onChange={(e) => handleImageUpload(e)} />
-      {/* {imgFile ? <img src={imgFile} alt="img" style={{ width: "50px" }} /> : ""} */}
-      <button onClick={handleCreateThread}>대화 시작하기</button>
-      <h2>메세지 보내기</h2>
-      <input
-        type="text"
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      <button onClick={handleSendMessage}>보내기</button>
+    // <div>
+    //   <h2>대화 시작하기</h2>
+    //   <input type="file" onChange={(e) => handleImageUpload(e)} />
+    //   {/* {imgFile ? <img src={imgFile} alt="img" style={{ width: "50px" }} /> : ""} */}
+    //   <button onClick={handleCreateThread}>대화 시작하기</button>
+    //   <h2>메세지 보내기</h2>
+    //   <input
+    //     type="text"
+    //     placeholder="Content"
+    //     value={content}
+    //     onChange={(e) => setContent(e.target.value)}
+    //   />
+    //   <button onClick={handleSendMessage}>보내기</button>
 
-      <h2>질문과 답변</h2>
-      {isChatStarted ? "채팅이 시작되었습니다. 잠시만 기다려주세요" : ""}
-      <p>답변 : {answer[0]}</p>
-      {question.map((q, index) => (
-        <div key={index}>
-          <p>질문: {q}</p>
-          <p>
-            답변:{" "}
-            {answer[index + 1] ? answer[index + 1] : "잠시간 기다려주세요"}
-          </p>
+    //   <h2>질문과 답변</h2>
+    //   {isChatStarted ? "채팅이 시작되었습니다. 잠시만 기다려주세요" : ""}
+    //   <p>답변 : {answer[0]}</p>
+    //   {question.map((q, index) => (
+    //     <div key={index}>
+    //       <p>질문: {q}</p>
+    //       <p>
+    //         답변:{" "}
+    //         {answer[index + 1] ? answer[index + 1] : "잠시간 기다려주세요"}
+    //       </p>
+    //     </div>
+    //   ))}
+    // </div>
+    <Mains isChatRoomExpanded={isChatRoomExpanded}>
+      <MainLogo src={process.env.PUBLIC_URL + `/assets/Logo.png`} />
+      <ChatRoom>
+        <FirstChatWrap>
+          <FirstChat>안녕하세요, 꺼비입니다! 무엇을 도와드릴까요?</FirstChat>
+        </FirstChatWrap>
+        <div>
+          <BillAnalysisBtn onClick={() => setIsChatRoomExpanded(true)}>
+            내 고지서 분석
+          </BillAnalysisBtn>
+          <QuestionBtn onClick={() => setIsChatRoomExpanded(true)}>
+            질문하기
+          </QuestionBtn>
         </div>
-      ))}
-    </div>
+        <MyChatWrap>
+          <MyChat>기후환경요금이 무슨 뜻이야?</MyChat>
+        </MyChatWrap>
+        <KkeobiChatWrap>
+          <KkeobiChat>
+            기후환경요금에 대해 설명해드릴게요!☺️ 깨끗하고 안전한 에너지 제공에
+            소요되는 비용으로, "기후환경요금 단가*사용전력량"로 계산해요. 2024년
+            0월 00일 기준 기후환경요금 단가는 9원입니다.더 자세한 정보를 알고
+            싶다면 말해주세요!☺️
+          </KkeobiChat>
+        </KkeobiChatWrap>
+      </ChatRoom>
+    </Mains>
   );
 };
 

@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 
 // 헤더
-export const Header = styled.header({
-  display: "flex",
-  height: 180,
+export const Header = styled.header((props) => ({
+  display: props.hidden ? "none" : "flex",
+  height: props.isChatRoomExpanded ? 0 : 180,
   justifyContent: "space-evenly",
-});
+  transition: props.isChatRoomExpanded ? "height 0.5s ease-in-out" : "none",
+}));
 
 // 헤더 인사
 export const HeaderGreeting = styled.p({});
@@ -14,9 +15,9 @@ export const HeaderGreeting = styled.p({});
 export const GoMyPageBtn = styled.div({});
 
 // 메인
-export const Mains = styled.main({
+export const Mains = styled.main((props) => ({
   width: 375,
-  height: 380,
+  height: props.isChatRoomExpanded ? 600 : 380,
   boxSizing: "border-box",
   paddingLeft: 15,
   paddingRight: 15,
@@ -26,11 +27,12 @@ export const Mains = styled.main({
   boxShadow: "0px -1px 10.199999809265137px rgba(0, 0, 0, 0.25)",
   borderRadius: 31,
   justifyContent: "flex-start",
-  alignItems: "center",
+  alignItems: "flex-start",
   gap: 10,
   display: "inline-flex",
   position: "relative",
-});
+  transition: "height 0.5s ease-in-out", // Add transition property for smooth animation
+}));
 
 // 메인 로고
 export const MainLogo = styled.img({

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-function Login() {
+function Login({ isChatRoomExpanded }) {
   // 유저 정보
   const { data } = useContext(userObjContext);
 
@@ -73,6 +73,10 @@ function Login() {
         // An error happened.
       });
   };
+
+  if (isChatRoomExpanded) {
+    return null;
+  }
 
   return data ? (
     <button onClick={handleLogout}>로그아웃</button>

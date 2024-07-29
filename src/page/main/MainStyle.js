@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 // 헤더
 export const Header = styled.header({
   display: "flex",
+  height: 180,
   justifyContent: "space-evenly",
 });
 
@@ -14,16 +15,108 @@ export const GoMyPageBtn = styled.div({});
 
 // 메인
 export const Mains = styled.main({
-  display: "flex",
-  flexDirection: "column",
+  width: 375,
+  height: 380,
+  boxSizing: "border-box",
+  paddingLeft: 15,
+  paddingRight: 15,
+  paddingTop: 52,
+  paddingBottom: 52,
+  background: "white",
+  boxShadow: "0px -1px 10.199999809265137px rgba(0, 0, 0, 0.25)",
+  borderRadius: 31,
+  justifyContent: "flex-start",
+  alignItems: "center",
+  gap: 10,
+  display: "inline-flex",
+  position: "relative",
 });
 
-// 메인 인사
-export const MainGreeting = styled.div({});
+// 메인 로고
+export const MainLogo = styled.img({
+  width: 150,
+  position: "absolute",
+  top: -40,
+  left: 110,
+});
 
-// 메인 버튼 wrap
-export const MainBtnWrap = styled.div({
-  display: "flex",
+// 메인 내 채팅방
+export const ChatRoom = styled.div({
+  width: 313,
+  flexDirection: "column",
+  gap: 14,
+  display: "inline-flex",
+});
+
+// 메인 첫 채팅창 wrap
+export const FirstChatWrap = styled.div({
+  padding: 11,
+  background: "#4753FF",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  borderBottomRightRadius: 20,
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 10,
+  display: "inline-flex",
+});
+
+// 메인 첫 채팅창
+export const FirstChat = styled.div({
+  color: "white",
+  fontSize: 15,
+  fontFamily: "Inter",
+  fontWeight: "400",
+  wordWrap: "break-word",
+});
+
+// 내 채팅 wrap
+export const MyChatWrap = styled.div({
+  alignSelf: "flex-end",
+  padding: 11,
+  background: "#F3F3F3",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  borderBottomLeftRadius: 20,
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 10,
+  display: "inline-flex",
+});
+
+// 내 채팅
+export const MyChat = styled.div({
+  color: "black",
+  fontSize: 15,
+  fontFamily: "Inter",
+  fontWeight: "400",
+  wordWrap: "break-word",
+});
+
+// 꺼비 채팅 wrap
+export const KkeobiChatWrap = styled.div({
+  alignSelf: "flex-start",
+  padding: 11,
+  background: "#4753FF",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  borderBottomRightRadius: 20,
+  justifyContent: "center",
+  alignItems: "flex-start",
+  gap: 10,
+  display: "inline-flex",
+});
+
+// 꺼비 채팅
+export const KkeobiChat = styled.div({
+  color: "white",
+  fontSize: 15,
+  fontFamily: "Inter",
+  fontWeight: "400",
+  wordWrap: "break-word",
 });
 
 // 메인 내 고지서 분석 버튼

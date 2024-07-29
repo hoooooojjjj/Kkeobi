@@ -50,6 +50,7 @@ const ChatComponent = () => {
         "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat",
         {
           imageUrl: url,
+          userInfo: "",
         }
       );
       // '/chat' 요청에서 응답으로 받은 thread id 값을 상태에 저장

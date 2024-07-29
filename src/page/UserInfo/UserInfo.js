@@ -74,9 +74,12 @@ function UserInfo() {
 
   // 사용자 정보 제출 시
   const handleSubmitUserInfo = async () => {
-    // 사용자 정보 Firestore에 저장
-    await setDoc(doc(db, "userInfo", data.uid), userInfo);
-    nav("/");
+    const isConfirm = window.confirm("입력하신 정보로 제출하시겠습니까?");
+    if (isConfirm) {
+      // 사용자 정보 Firestore에 저장
+      await setDoc(doc(db, "userInfo", data.uid), userInfo);
+      nav("/");
+    }
   };
 
   if (isPending) {

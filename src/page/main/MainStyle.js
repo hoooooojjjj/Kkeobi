@@ -13,10 +13,14 @@ export const Header = styled.header`
 `;
 
 // 헤더 인사
-export const HeaderGreeting = styled.p({});
+export const HeaderGreeting = styled.p({
+  height: 30,
+});
 
 // 헤더 내 장독대 관리하기 버튼
-export const GoMyPageBtn = styled.div({});
+export const GoMyPageBtn = styled.button({
+  height: 30,
+});
 
 export const BackBtn = styled.button((props) => ({
   display: props.hidden ? "block" : "none",

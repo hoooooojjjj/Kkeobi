@@ -39,8 +39,10 @@ function Main() {
   return data ? (
     <ContainerStyle>
       <Header isChatRoomExpanded={isChatRoomExpanded} hidden={hidden}>
-        <HeaderGreeting>{data.displayName}</HeaderGreeting>
-        <GoMyPageBtn>내 장독대 관리하기</GoMyPageBtn>
+        <HeaderGreeting>{data.displayName}님, 반갑습니다.</HeaderGreeting>
+        <GoMyPageBtn onClick={() => nav("/mypage")}>
+          내 장독대 관리하기
+        </GoMyPageBtn>
       </Header>
       <ChatComponent
         isChatRoomExpanded={isChatRoomExpanded}

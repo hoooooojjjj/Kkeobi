@@ -57,6 +57,7 @@ export const ChatContentText = styled.p({
 
 // 정보 선택 버튼 wrap
 export const InfoSelectBtnWrap = styled.div({
+  cursor: "pointer",
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "flex-start",
@@ -96,6 +97,7 @@ export const InfoSelectBtnText = styled.div({
 
 // 해당 없음 버튼
 export const NoneSelectBtn = styled.div({
+  cursor: "pointer",
   alignSelf: "stretch",
   flex: "1 1 0",
   paddingLeft: 91,

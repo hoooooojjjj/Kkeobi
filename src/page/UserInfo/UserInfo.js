@@ -157,7 +157,15 @@ function UserInfo() {
                 >
                   <InfoSelectBtnText>생명 유지 장치</InfoSelectBtnText>
                 </InfoSelectBtn>
-                <NoneSelectBtn>
+                <NoneSelectBtn
+                  onClick={() => handleFamilyInfoSelect("해당 없음")}
+                  style={{
+                    backgroundColor: userInfo.family.includes("해당 없음")
+                      ? "#787878"
+                      : "",
+                    color: userInfo.family.includes("해당 없음") ? "white" : "",
+                  }}
+                >
                   <NoneSelectBtnText>해당 없음</NoneSelectBtnText>
                 </NoneSelectBtn>
               </InfoSelectBtnWrap>
@@ -270,7 +278,17 @@ function UserInfo() {
                 >
                   <InfoSelectBtnText>차상위계층</InfoSelectBtnText>
                 </InfoSelectBtn>
-                <NoneSelectBtn>
+                <NoneSelectBtn
+                  onClick={() => handleWelfareInfoSelect("해당 없음")}
+                  style={{
+                    backgroundColor: userInfo.welfare.includes("해당 없음")
+                      ? "#787878"
+                      : "",
+                    color: userInfo.welfare.includes("해당 없음")
+                      ? "white"
+                      : "",
+                  }}
+                >
                   <NoneSelectBtnText>해당 없음</NoneSelectBtnText>
                 </NoneSelectBtn>
               </InfoSelectBtnWrap>

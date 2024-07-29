@@ -20,12 +20,13 @@ import { userObjContext } from "../../App";
 import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { Spin } from "antd";
 
 function UserInfo() {
   const nav = useNavigate();
 
   // 유저 정보
-  const { data } = useContext(userObjContext);
+  const { data, isPending } = useContext(userObjContext);
 
   // 사용자 정보
   const [userInfo, setUserInfo] = useState({
@@ -77,22 +78,30 @@ function UserInfo() {
     await setDoc(doc(db, "userInfo", data.uid), userInfo);
     nav("/");
   };
+
+  if (isPending) {
+    return (
+      <ContainerStyle>
+        <Spin />
+      </ContainerStyle>
+    );
+  }
   return (
     <ContainerStyle>
       <Header></Header>
       <ChatRoom>
         <ChatWrap>
           <ChatContentWrap>
-            안녕하세요, {data && data.displayName}님. 회원 가입을 축하합니다!🥳
-            맞춤형 관리를 위해 우선 몇 가지 질문을 하겠습니다.
+            안녕하세요, {data.displayName}님. 회원 가입을 축하합니다!🥳 맞춤형
+            관리를 위해 우선 몇 가지 질문을 하겠습니다.
           </ChatContentWrap>
         </ChatWrap>
         <ChatBox>
           <ChatWrap>
             <ChatContentWrap>
               <ChatContentText>
-                다음 중 000님이 해당되는 사항을 모두 선택해주세요.
-                (대가족요금/생명유지장치)
+                다음 중 {data.displayName}님이 해당되는 사항을 모두
+                선택해주세요. (대가족요금/생명유지장치)
               </ChatContentText>
               <InfoSelectBtnWrap>
                 <InfoSelectBtn
@@ -157,8 +166,8 @@ function UserInfo() {
           <ChatWrap>
             <ChatContentWrap>
               <ChatContentText>
-                다음 중 000님이 해당되는 사항을 모두 선택해주세요.
-                (복지할인요금)
+                다음 중 {data.displayName}님이 해당되는 사항을 모두
+                선택해주세요. (복지할인요금)
               </ChatContentText>
               <InfoSelectBtnWrap>
                 <InfoSelectBtn

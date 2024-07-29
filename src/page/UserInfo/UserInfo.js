@@ -296,8 +296,8 @@ function UserInfo() {
           </ChatWrap>
           <DetailStandard>자세한 기준 보기</DetailStandard>
         </ChatBox>
-        <SubmitBtn>
-          <SubmitBtnText onClick={handleSubmitUserInfo}>제출하기</SubmitBtnText>
+        <SubmitBtn onClick={handleSubmitUserInfo}>
+          <SubmitBtnText>제출하기</SubmitBtnText>
         </SubmitBtn>
       </ChatRoom>
     </ContainerStyle>

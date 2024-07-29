@@ -135,6 +135,7 @@ export const DetailStandard = styled.div({
 
 // sumbit 버튼
 export const SubmitBtn = styled.button({
+  cursor: "pointer",
   width: 340,
   alignSelf: "stretch",
   flex: "1 1 0",

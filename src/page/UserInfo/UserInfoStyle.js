@@ -76,8 +76,7 @@ export const InfoSelectBtn = styled.div({
   background: "white",
   color: "#4753FF",
   "&:hover": {
-    background: "#4753FF",
-    color: "white",
+    background: "#D7D7D7",
   },
   borderRadius: 10,
   border: "1.12px #4753FF solid",
@@ -107,8 +106,7 @@ export const NoneSelectBtn = styled.div({
   background: "white",
   color: "#787878",
   "&:hover": {
-    color: "white",
-    background: "#787878",
+    background: "#D7D7D7",
   },
   borderRadius: 10,
   border: "1.12px #787878 solid",

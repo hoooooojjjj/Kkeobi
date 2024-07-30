@@ -39,6 +39,29 @@ const updateThreadID = async (userObj, threadID) => {
   }
 };
 
+// 파이어스토어에 고지서 텍스트 추출한거 저장
+const saveBillImgToJson = async (userObj, billImgToJson) => {
+  const billImgToJsonRef = doc(db, "billImgToJson", userObj.uid);
+
+  try {
+    // 문서가 존재하는지 확인
+    const docSnap = await getDoc(billImgToJsonRef);
+    if (docSnap.exists()) {
+      // 문서가 존재하면 업데이트하여 threadID를 업데이트
+      await updateDoc(billImgToJsonRef, {
+        billImgToJson: billImgToJson,
+      });
+    } else {
+      // 문서가 존재하지 않으면 새로운 문서를 생성하고 threadID를 저장
+      await setDoc(billImgToJsonRef, {
+        billImgToJson,
+      });
+    }
+  } catch (error) {
+    console.error("Error adding billImgToJsonRef: ", error);
+  }
+};
+
 const CreateThread = ({
   setIsAnswerPending,
   mutation,
@@ -101,7 +124,12 @@ const CreateThread = ({
       };
       mutation.mutate({ userObj, contents });
 
+      console.log(response.data.billImgToJson);
+
       setIsAnswerPending(false);
+
+      // 고지서 텍스트 추출한 json 파이어스토어에 저장
+      saveBillImgToJson(userObj, response.data.billImgToJson);
     } catch (error) {
       // 에러 발생 시 콘솔에 에러 출력
       console.error("Failed to create thread : ", error);
@@ -121,7 +149,6 @@ const CreateThread = ({
         }}
       />
       <StyledLabel htmlFor="billFile">내 고지서 분석</StyledLabel>
-
       <QuestionBtn onClick={() => setIsChatRoomExpanded(true)}>
         질문하기
       </QuestionBtn>

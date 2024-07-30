@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ContainerStyle } from "../../containerStyle";
 import { userObjContext } from "../../App";
 import { Spin } from "antd";
@@ -38,11 +38,36 @@ import {
   MyPageWrap,
 } from "./MyPageStyle";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+// 고지서 텍스트 추출한 거 가져오기
+const getBillImgToJson = async (userObj, setBillPrice) => {
+  const docRef = doc(db, "billImgToJson", userObj.uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    setBillPrice(docSnap.data());
+  } else {
+    return null;
+  }
+};
 
 function MyPage() {
   const nav = useNavigate();
+
   // 유저 정보
-  const { data, isPending } = useContext(userObjContext);
+  const { data: userObj, isPending } = useContext(userObjContext);
+
+  // 이번 생활요금 state
+  const [billPrice, setBillPrice] = useState(null);
+
+  useEffect(() => {
+    if (userObj) {
+      getBillImgToJson(userObj, setBillPrice);
+    }
+  }, [userObj]);
+
   if (isPending) {
     return (
       <ContainerStyle>
@@ -57,12 +82,11 @@ function MyPage() {
         <Header>
           <button onClick={() => nav("/")}>뒤로가기</button>
         </Header>
-
         <MyProfileWrap>
-          <MyProfileImg src={data.photoURL} />
+          <MyProfileImg src={userObj.photoURL} />
           <MyProfileNameWrap>
             <MyProfileName Weight={600}>
-              {data.displayName}님의 장독대
+              {userObj.displayName}님의 장독대
             </MyProfileName>
           </MyProfileNameWrap>
         </MyProfileWrap>
@@ -77,7 +101,9 @@ function MyPage() {
                   <OneBillContentWrap>
                     <OneBillName>전기</OneBillName>
                     <OneBillImg src="https://via.placeholder.com/29x29" />
-                    <OneBillPrice>33,472원</OneBillPrice>
+                    <OneBillPrice>
+                      {billPrice && billPrice.billImgToJson.청구금액}
+                    </OneBillPrice>
                   </OneBillContentWrap>
                 </OneBillBackground>
               </OneBillWrap>
@@ -170,7 +196,7 @@ function MyPage() {
                     11%
                   </div> */}
                     <GraphExpainText>
-                      {data.displayName}님은 전년 동월보다 공과금을{" "}
+                      {userObj.displayName}님은 전년 동월보다 공과금을{" "}
                       <strong>11%</strong> 더 많이 내고 있어요.
                     </GraphExpainText>
                   </GraphExpain>

@@ -101,6 +101,10 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
     }
   }, [data, curContent, isChatRoomExpanded]);
 
+  if (isError) {
+    return <div>{error.message}</div>;
+  }
+
   return (
     <>
       <Mains isChatRoomExpanded={isChatRoomExpanded}>

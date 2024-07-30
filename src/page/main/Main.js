@@ -5,7 +5,7 @@ import Login from "../../component/Login";
 import { userObjContext } from "../../App";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
-import ChatComponent from "../../component/OpenAI";
+import Chat from "../../component/Chat/Chat";
 
 function Main() {
   const nav = useNavigate();
@@ -44,7 +44,7 @@ function Main() {
           내 장독대 관리하기
         </GoMyPageBtn>
       </Header>
-      <ChatComponent
+      <Chat
         isChatRoomExpanded={isChatRoomExpanded}
         setIsChatRoomExpanded={setIsChatRoomExpanded}
         hidden={hidden}

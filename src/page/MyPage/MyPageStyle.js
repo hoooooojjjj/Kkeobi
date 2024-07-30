@@ -8,6 +8,11 @@ export const MyPageWrap = styled.div({
   width: 375,
   height: 600,
   overflowY: "auto",
+  msOverflowStyle: "none" /* Internet Explorer */,
+  scrollbarWidth: "none" /* Firefox */,
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
 });
 
 export const MyProfileWrap = styled.section({

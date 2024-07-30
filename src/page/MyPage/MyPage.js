@@ -53,7 +53,6 @@ function MyPage() {
 
   return (
     <ContainerStyle>
-      {" "}
       <MyPageWrap>
         <Header>
           <button onClick={() => nav("/")}>뒤로가기</button>

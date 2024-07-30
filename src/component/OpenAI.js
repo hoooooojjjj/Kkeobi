@@ -154,6 +154,10 @@ const ChatComponent = ({
 
   // 대화 스레드 생성 시
   const handleCreateThread = async (e) => {
+    const isCreateThread = window.confirm("고지서 분석을 시작하시겠습니까?");
+    if (!isCreateThread) {
+      return null;
+    }
     setIsAnswerPending(true);
 
     // 사용자 정보 가져오기
@@ -245,6 +249,17 @@ const ChatComponent = ({
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleFileSave = (file) => {
+    const reader = new FileReader();
+    // 파일을 URL로 읽어올 수 있음 -> onloadend를 트리거함
+    reader.readAsDataURL(file);
+    // 파일 읽어오기가 끝나면 실행됨.
+    reader.onloadend = (finishEvent) => {
+      // 파일의 sting URL을 반환함 -> img src에 추가해서 렌더링 가능
+      setimgFile(finishEvent.currentTarget.result);
+    };
+  };
+
   useEffect(() => {
     if (isChatRoomExpanded) {
       scrollToBottom();
@@ -270,6 +285,7 @@ const ChatComponent = ({
               onChange={(e) => {
                 setIsChatRoomExpanded(true);
                 handleCreateThread(e);
+                handleFileSave(e.target.files[0]);
               }}
             />
             <StyledLabel htmlFor="billFile">내 고지서 분석</StyledLabel>
@@ -304,7 +320,15 @@ const ChatComponent = ({
           {isAnswerPending ? (
             <>
               <MyChatWrap>
-                <MyChat>{curContent}</MyChat>
+                {curContent ? (
+                  <MyChat>{curContent}</MyChat>
+                ) : (
+                  <img
+                    src={imgFile}
+                    alt="고지서 이미지"
+                    style={{ width: "200px" }}
+                  />
+                )}
               </MyChatWrap>
               <KkeobiChatWrap ref={chatEndRef}>
                 <PendingAnswer answerLoaded={!isAnswerPending}>
@@ -328,7 +352,7 @@ const ChatComponent = ({
             // onChange={handleImageUpload}
           />
           <StyledLabel htmlFor="file">+</StyledLabel>
-          {/* {imgFile ? <img src={imgFile} alt="img" style={{ width: "50px" }} /> : ""} */}
+
           <MessageInput
             value={content}
             onChange={(e) => setContent(e.target.value)}

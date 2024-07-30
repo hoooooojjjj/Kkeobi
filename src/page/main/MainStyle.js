@@ -63,7 +63,7 @@ export const MainLogo = styled.img({
 
 // 메인 내 채팅방
 export const ChatRoom = styled.div({
-  width: 313,
+  width: "100%",
   flexDirection: "column",
   gap: 14,
   display: "inline-flex",
@@ -71,6 +71,7 @@ export const ChatRoom = styled.div({
 
 // 메인 첫 채팅창 wrap
 export const FirstChatWrap = styled.div({
+  width: "85%",
   padding: 11,
   background: "#4753FF",
   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",

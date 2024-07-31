@@ -121,6 +121,7 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
             mutation={mutation}
             setimgFile={setimgFile}
             setIsChatRoomExpanded={setIsChatRoomExpanded}
+            data={data}
           />
           {isPending ? (
             <Spin />

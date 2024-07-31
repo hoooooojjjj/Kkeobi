@@ -67,6 +67,7 @@ const CreateThread = ({
   mutation,
   setimgFile,
   setIsChatRoomExpanded,
+  data,
 }) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
@@ -164,6 +165,7 @@ const CreateThread = ({
       updateThreadID(userObj, response.data.thread);
 
       const contents = {
+        question: null,
         answer: "질문이 시작되었어요! 꺼비한테 무엇이든 질문해보세요",
       };
 
@@ -201,6 +203,15 @@ const CreateThread = ({
       >
         그냥 채팅 시작하기
       </QuestionBtn>
+      {data && (
+        <QuestionBtn
+          onClick={() => {
+            setIsChatRoomExpanded(true);
+          }}
+        >
+          채팅 다시하기
+        </QuestionBtn>
+      )}
     </div>
   );
 };

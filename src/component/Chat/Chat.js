@@ -58,7 +58,7 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
 
-  // 사용자가 업로드한 이미지 파일
+  // 사용자가 고지서 분석 시 업로드한 이미지 파일
   const [imgFile, setimgFile] = useState();
 
   // 답변 왔는지 여부
@@ -128,17 +128,19 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
             data &&
             data.content.map((Chat, index) => (
               <OneChatWrap key={Chat.answer}>
-                <MyChatWrap>
-                  {Chat.question.startsWith("https://firebasestorage") ? (
-                    <img
-                      src={Chat.question}
-                      alt="img"
-                      style={{ width: "200px" }}
-                    />
-                  ) : (
-                    <MyChat>{Chat.question}</MyChat>
-                  )}
-                </MyChatWrap>
+                {Chat.question && (
+                  <MyChatWrap>
+                    {Chat.question?.startsWith("https://firebasestorage") ? (
+                      <img
+                        src={Chat.question}
+                        alt="img"
+                        style={{ width: "200px" }}
+                      />
+                    ) : (
+                      <MyChat>{Chat.question}</MyChat>
+                    )}
+                  </MyChatWrap>
+                )}
                 <KkeobiChatWrap ref={chatEndRef}>
                   <KkeobiChat>{Chat.answer}</KkeobiChat>
                 </KkeobiChatWrap>
@@ -147,17 +149,22 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
           )}
           {isAnswerPending ? (
             <>
-              <MyChatWrap>
-                {curContent ? (
-                  <MyChat>{curContent}</MyChat>
-                ) : (
-                  <img
-                    src={imgFile}
-                    alt="고지서 이미지"
-                    style={{ width: "200px" }}
-                  />
-                )}
-              </MyChatWrap>
+              {curContent ? (
+                <MyChatWrap>
+                  <MyChat>{curContent}</MyChat>{" "}
+                </MyChatWrap>
+              ) : (
+                imgFile && (
+                  <MyChatWrap>
+                    <img
+                      src={imgFile}
+                      alt="고지서 이미지"
+                      style={{ width: "200px" }}
+                    />
+                  </MyChatWrap>
+                )
+              )}
+
               <KkeobiChatWrap ref={chatEndRef}>
                 <PendingAnswer answerLoaded={!isAnswerPending}>
                   <span></span>

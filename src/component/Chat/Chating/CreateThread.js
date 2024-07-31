@@ -71,6 +71,7 @@ const CreateThread = ({
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
 
+  // 고지서 분석 이미지 파일 string으로 저장(렌더링을 위해)
   const handleFileSave = (file) => {
     const reader = new FileReader();
     // 파일을 URL로 읽어올 수 있음 -> onloadend를 트리거함
@@ -82,12 +83,14 @@ const CreateThread = ({
     };
   };
 
-  // 대화 스레드 생성 시
-  const handleCreateThread = async (e) => {
+  // 고지서 분석 버튼 클릭으로 대화 스레드 생성 시
+  const handleCreateThreadbillImg = async (e) => {
     const isCreateThread = window.confirm("고지서 분석을 시작하시겠습니까?");
     if (!isCreateThread) {
       return null;
     }
+
+    // 답변 대기 시작
     setIsAnswerPending(true);
 
     // 사용자 정보 가져오기
@@ -106,30 +109,69 @@ const CreateThread = ({
     const url = await getDownloadURL(storageRef);
 
     try {
-      // '/chat' 엔드포인트로 POST 요청(이미지 URL 전송 후 대화 스레드 생성)
-      const response = await axios.post(
-        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat",
-        {
-          imageUrl: url,
-          userInfo: userInfo,
-        }
-      );
+      // '/chat/billImg' 엔드포인트로 POST 요청(이미지 URL 전송 후 대화 스레드 생성)
+      const response = await axios.post("http://localhost:8080/chat/billImg", {
+        imageUrl: url,
+        userInfo: userInfo,
+      });
 
-      // '/chat' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
+      // '/chat/billImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
       updateThreadID(userObj, response.data.thread);
 
+      // 질문과 답변을 contents에 저장
       const contents = {
         question: url,
         answer: response.data.response.answer,
       };
+
+      // mutation으로 파이어스토어에 질문과 답변 저장
       mutation.mutate({ userObj, contents });
 
-      console.log(response.data.billImgToJson);
-
+      // 답변 대기 종료
       setIsAnswerPending(false);
 
       // 고지서 텍스트 추출한 json 파이어스토어에 저장
       saveBillImgToJson(userObj, response.data.billImgToJson);
+    } catch (error) {
+      // 에러 발생 시 콘솔에 에러 출력
+      console.error("Failed to create thread : ", error);
+    }
+  };
+
+  // 질문하기 버튼 클릭으로 대화 스레드 생성 시
+  const handleCreateThreadWithoutImg = async () => {
+    const isCreateThread = window.confirm("질문을 시작하시겠습니까?");
+    if (!isCreateThread) {
+      return null;
+    }
+
+    // 답변 대기 시작
+    setIsAnswerPending(true);
+
+    // 사용자 정보 가져오기
+    const userInfo = await getUserInfo(userObj);
+
+    try {
+      // '/chat/noImg' 엔드포인트로 POST 요청(대화 스레드 생성)
+      const response = await axios.post(
+        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat/noImg",
+        {
+          userInfo: userInfo,
+        }
+      );
+
+      // '/chat/noImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
+      updateThreadID(userObj, response.data.thread);
+
+      const contents = {
+        answer: "질문이 시작되었어요! 꺼비한테 무엇이든 질문해보세요",
+      };
+
+      // mutation으로 파이어스토어에 첫 답변 저장
+      mutation.mutate({ userObj, contents });
+
+      // 답변 대기 종료
+      setIsAnswerPending(false);
     } catch (error) {
       // 에러 발생 시 콘솔에 에러 출력
       console.error("Failed to create thread : ", error);
@@ -144,13 +186,20 @@ const CreateThread = ({
         style={{ display: "none" }}
         onChange={(e) => {
           setIsChatRoomExpanded(true);
-          handleCreateThread(e);
+          handleCreateThreadbillImg(e);
           handleFileSave(e.target.files[0]);
         }}
       />
-      <StyledLabel htmlFor="billFile">내 고지서 분석</StyledLabel>
-      <QuestionBtn onClick={() => setIsChatRoomExpanded(true)}>
-        질문하기
+      <StyledLabel htmlFor="billFile">
+        고지서 분석으로 채팅 시작하기
+      </StyledLabel>
+      <QuestionBtn
+        onClick={() => {
+          setIsChatRoomExpanded(true);
+          handleCreateThreadWithoutImg();
+        }}
+      >
+        그냥 채팅 시작하기
       </QuestionBtn>
     </div>
   );

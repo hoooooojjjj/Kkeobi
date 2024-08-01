@@ -467,7 +467,7 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
               )}
               <KkeobiChatWrap ref={chatEndRef}>
                 <KkeobiChat style={{ display: "flex" }}>
-                  <div>{imgFile ? "꺼비가 고지서를 읽고 있어요!" : ""}</div>
+                  <div>{imgFile ? "꺼비가 답변을 준비하고 있어요!" : ""}</div>
                   <PendingAnswer answerLoaded={!isAnswerPending}>
                     <span></span>
                     <span></span>

@@ -97,10 +97,10 @@ const CreateThread = ({
 
   // 고지서 분석 버튼 클릭으로 대화 스레드 생성 시
   const handleCreateThreadbillImg = async (e) => {
-    const isCreateThread = window.confirm("고지서 분석을 시작하시겠습니까?");
-    if (!isCreateThread) {
-      return null;
-    }
+    // const isCreateThread = window.confirm("고지서 분석을 시작하시겠습니까?");
+    // if (!isCreateThread) {
+    //   return null;
+    // }
 
     setIsFirstChat(false);
 

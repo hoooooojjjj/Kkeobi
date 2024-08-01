@@ -159,13 +159,13 @@ export const MonthBillWrap = styled.section({
 // 그래프 wrap
 export const GraphWrap = styled.div({
   width: 300,
-  height: 304,
+  height: 400,
   position: "relative",
 });
 
 export const GraphBackground = styled.div({
   width: 271.56,
-  height: 276.74,
+  height: 340,
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
@@ -187,6 +187,8 @@ export const GraphTitleWrap = styled.div({
 export const GraphTitle = styled.div({
   color: "#2E2E30",
   fontSize: 14,
+  marginBottom: 15,
+  marginTop: 15,
   fontFamily: "Inter",
   fontWeight: "700",
   wordWrap: "break-word",
@@ -194,7 +196,7 @@ export const GraphTitle = styled.div({
 
 export const GraphContentWrap = styled.div({
   alignSelf: "stretch",
-  height: 246.34,
+  height: 300,
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
@@ -247,7 +249,7 @@ export const OneGraphBarText = styled.div({
 });
 
 export const GraphExpainWrap = styled.div({
-  height: 66.34,
+  height: 80,
   flexDirection: "column",
   justifyContent: "flex-start",
   alignItems: "center",
@@ -257,7 +259,7 @@ export const GraphExpainWrap = styled.div({
 
 export const GraphExpain = styled.div({
   alignSelf: "stretch",
-  height: 25,
+  // height: 40,
   justifyContent: "center",
   alignItems: "flex-end",
   gap: 5,
@@ -266,7 +268,7 @@ export const GraphExpain = styled.div({
 
 export const GraphExpainText = styled.div({
   width: 180,
-  height: 27,
+  height: 50,
   color: "#767676",
   fontSize: 12,
   fontFamily: "Inter",

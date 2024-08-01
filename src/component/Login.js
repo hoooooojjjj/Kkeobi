@@ -88,7 +88,7 @@ function Login({ isChatRoomExpanded }) {
   }
 
   return data ? (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: 0 }}>
       <button
         style={{
           border: "none",

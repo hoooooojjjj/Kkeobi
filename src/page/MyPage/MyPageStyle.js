@@ -6,7 +6,7 @@ export const Header = styled.header({
 
 export const MyPageWrap = styled.div({
   width: 375,
-  height: 700,
+  height: 760,
   overflowY: "auto",
   msOverflowStyle: "none" /* Internet Explorer */,
   scrollbarWidth: "none" /* Firefox */,
@@ -159,7 +159,7 @@ export const MonthBillWrap = styled.section({
 // 그래프 wrap
 export const GraphWrap = styled.div({
   width: 300,
-  height: 400,
+  height: 390,
   position: "relative",
 });
 

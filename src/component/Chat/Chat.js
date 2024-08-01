@@ -170,7 +170,6 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
   }, [ChatNavigation]);
 
   useEffect(() => {
-    console.log(userObj);
     scrollToBottom();
   }, [data, curContent]);
 

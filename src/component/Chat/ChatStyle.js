@@ -41,6 +41,11 @@ export const Mains = styled.main(() => ({
   display: "inline-flex",
   flexDirection: "column",
   position: "relative",
+  msOverflowStyle: "none" /* Internet Explorer */,
+  scrollbarWidth: "none" /* Firefox */,
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
 }));
 
 // 메인 내 채팅방

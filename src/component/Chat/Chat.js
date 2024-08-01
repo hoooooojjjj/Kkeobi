@@ -158,10 +158,13 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
 
     try {
       // '/chat/noImg' 엔드포인트로 POST 요청(대화 스레드 생성)
-      const response = await axios.post("http://localhost:8080/chat/noImg", {
-        userInfo: userInfo,
-        ChatNavigation: ChatNavigation,
-      });
+      const response = await axios.post(
+        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat/noImg",
+        {
+          userInfo: userInfo,
+          ChatNavigation: ChatNavigation,
+        }
+      );
 
       // '/chat/noImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
       updateThreadID(userObj, response.data.thread);

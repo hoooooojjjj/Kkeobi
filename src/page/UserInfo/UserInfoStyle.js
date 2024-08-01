@@ -29,7 +29,7 @@ export const HeaderLogo = styled.img({
 
 // 채팅방
 export const ChatRoom = styled.div({
-  height: 630,
+  height: 600,
   padding: 10,
   display: "flex",
   flexDirection: "column",

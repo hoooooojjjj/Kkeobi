@@ -6,10 +6,14 @@ import { GoogleLoginImg } from "../page/main/MainStyle";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Spin } from "antd";
 
 function Login({ isChatRoomExpanded }) {
   // 유저 정보
   const { data } = useContext(userObjContext);
+
+  // 로당
+  const [isLoading, setIsLoading] = useState(false);
 
   const nav = useNavigate();
 
@@ -31,9 +35,12 @@ function Login({ isChatRoomExpanded }) {
 
   // 구글 로그인
   const handleGoogleLogin = () => {
+    setIsLoading(true);
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(async (result) => {
+        setIsLoading(false);
+
         // 로그인 성공 시 유저 정보 다시 fetch
         mutation.mutate();
 
@@ -56,6 +63,7 @@ function Login({ isChatRoomExpanded }) {
         }
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log("로그인 에러 : " + error);
       });
   };
@@ -80,6 +88,18 @@ function Login({ isChatRoomExpanded }) {
 
   return data ? (
     <button onClick={handleLogout}>로그아웃</button>
+  ) : isLoading ? (
+    <div
+      style={{
+        width: 200,
+        height: 200,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Spin></Spin>
+    </div>
   ) : (
     <GoogleLoginImg
       onClick={handleGoogleLogin}

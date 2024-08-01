@@ -122,4 +122,7 @@ export const BillAnalysisBtn = styled.button({});
 // 구글 로그인 이미지
 export const GoogleLoginImg = styled.img({
   width: 200,
+  "&:hover": {
+    transform: "scale(1.01)",
+  },
 });

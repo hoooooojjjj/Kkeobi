@@ -34,6 +34,11 @@ export const ChatRoom = styled.div({
   display: "flex",
   flexDirection: "column",
   overflowY: "scroll",
+  msOverflowStyle: "none" /* Internet Explorer */,
+  scrollbarWidth: "none" /* Firefox */,
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
 });
 
 // 채팅창 wrap

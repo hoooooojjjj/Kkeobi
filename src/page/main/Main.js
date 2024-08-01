@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ContainerStyle } from "../../containerStyle";
+import { ContainerStyle, Iphone } from "../../containerStyle";
 import {
   CanAnswerText1,
   CanAnswerText2,
@@ -308,14 +308,6 @@ function Main() {
           </div>
         </div>
       </div>
-      <Login
-        style={{
-          alignSelf: "stretch",
-          height: 56,
-          background: "white",
-          borderRadius: 31,
-        }}
-      />
     </ContainerStyle>
   ) : (
     <ContainerStyle

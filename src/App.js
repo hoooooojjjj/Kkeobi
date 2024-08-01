@@ -3,6 +3,7 @@ import Router from "./component/Router";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { useQuery } from "@tanstack/react-query";
+import { Iphone } from "./containerStyle";
 
 export const userObjContext = createContext();
 
@@ -29,7 +30,16 @@ function App() {
 
   return (
     <userObjContext.Provider value={{ isPending, isError, data, error }}>
-      <Router />
+      <Iphone
+        src={process.env.PUBLIC_URL + `/assets/iphonePng.png`}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Router />
+      </Iphone>
     </userObjContext.Provider>
   );
 }

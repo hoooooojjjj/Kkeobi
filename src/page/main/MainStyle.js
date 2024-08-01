@@ -202,7 +202,10 @@ export const SelectBillBtn = styled.button({
   paddingRight: 106,
   paddingTop: 11,
   paddingBottom: 11,
-  background: "#EDDFC7",
+  background: "#FEFEE4",
+  "&:hover": {
+    background: "#EDDFC7",
+  },
   borderRadius: 30,
   border: "1px #4D956D solid",
   flexDirection: "column",

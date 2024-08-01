@@ -15,6 +15,8 @@ import {
   ChatBox,
   SubmitBtn,
   SubmitBtnText,
+  HeaderLogoWrap,
+  HeaderLogo,
 } from "./UserInfoStyle";
 import { userObjContext } from "../../App";
 import { db } from "../../firebase";
@@ -91,7 +93,13 @@ function UserInfo() {
   }
   return (
     <ContainerStyle>
-      <Header></Header>
+      <Header>
+        <HeaderLogoWrap>
+          <HeaderLogo
+            src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.png`}
+          />
+        </HeaderLogoWrap>
+      </Header>
       <ChatRoom>
         <ChatWrap>
           <ChatContentWrap>
@@ -111,7 +119,7 @@ function UserInfo() {
                   onClick={() => handleFamilyInfoSelect("5인 이상 가구")}
                   style={{
                     backgroundColor: userInfo.family.includes("5인 이상 가구")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.family.includes("5인 이상 가구")
                       ? "white"
@@ -124,7 +132,7 @@ function UserInfo() {
                   onClick={() => handleFamilyInfoSelect("출산 가구")}
                   style={{
                     backgroundColor: userInfo.family.includes("출산 가구")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.family.includes("출산 가구") ? "white" : "",
                   }}
@@ -135,7 +143,7 @@ function UserInfo() {
                   onClick={() => handleFamilyInfoSelect("3자녀 이상 가구")}
                   style={{
                     backgroundColor: userInfo.family.includes("3자녀 이상 가구")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.family.includes("3자녀 이상 가구")
                       ? "white"
@@ -148,7 +156,7 @@ function UserInfo() {
                   onClick={() => handleFamilyInfoSelect("생명 유지 장치")}
                   style={{
                     backgroundColor: userInfo.family.includes("생명 유지 장치")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.family.includes("생명 유지 장치")
                       ? "white"
@@ -185,7 +193,7 @@ function UserInfo() {
                   onClick={() => handleWelfareInfoSelect("장애인")}
                   style={{
                     backgroundColor: userInfo.welfare.includes("장애인")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("장애인") ? "white" : "",
                   }}
@@ -196,7 +204,7 @@ function UserInfo() {
                   onClick={() => handleWelfareInfoSelect("국가 유공자")}
                   style={{
                     backgroundColor: userInfo.welfare.includes("국가 유공자")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("국가 유공자")
                       ? "white"
@@ -209,7 +217,7 @@ function UserInfo() {
                   onClick={() => handleWelfareInfoSelect("상이 유공자")}
                   style={{
                     backgroundColor: userInfo.welfare.includes("상이 유공자")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("상이 유공자")
                       ? "white"
@@ -222,7 +230,7 @@ function UserInfo() {
                   onClick={() => handleWelfareInfoSelect("독립 유공자")}
                   style={{
                     backgroundColor: userInfo.welfare.includes("독립 유공자")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("독립 유공자")
                       ? "white"
@@ -239,7 +247,7 @@ function UserInfo() {
                     backgroundColor: userInfo.welfare.includes(
                       "기초생활 (생계, 의료)"
                     )
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("기초생활 (생계, 의료)")
                       ? "white"
@@ -256,7 +264,7 @@ function UserInfo() {
                     backgroundColor: userInfo.welfare.includes(
                       "기초생활 (주거, 교육)"
                     )
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("기초생활 (주거, 교육)")
                       ? "white"
@@ -269,7 +277,7 @@ function UserInfo() {
                   onClick={() => handleWelfareInfoSelect("차상위계층")}
                   style={{
                     backgroundColor: userInfo.welfare.includes("차상위계층")
-                      ? "#4753FF"
+                      ? "#FEC9B9"
                       : "",
                     color: userInfo.welfare.includes("차상위계층")
                       ? "white"

@@ -2,7 +2,29 @@ import styled from "@emotion/styled";
 
 // 헤더
 export const Header = styled.header({
+  width: "100%",
   height: 100,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+// 헤더 로고 wrap
+export const HeaderLogoWrap = styled.div({
+  width: 68,
+  height: 68,
+  background: "#F3F3F3",
+  boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25) inset",
+  borderRadius: 9999,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+// 헤더 로고
+export const HeaderLogo = styled.img({
+  width: 70,
+  borderRadius: 9999,
 });
 
 // 채팅방
@@ -24,7 +46,7 @@ export const ChatBox = styled.div({
 
 // 채팅방 내 채팅창
 export const ChatWrap = styled.div({
-  width: 320,
+  width: 302,
   marginTop: 10,
   padding: 10,
   background: "#F3F3F3",
@@ -79,7 +101,7 @@ export const InfoSelectBtn = styled.div({
     background: "#D7D7D7",
   },
   borderRadius: 10,
-  border: "1.12px #4753FF solid",
+  border: "1.12px #FEC9B9 solid",
   justifyContent: "center",
   alignItems: "center",
   gap: 10,
@@ -89,8 +111,8 @@ export const InfoSelectBtn = styled.div({
 // 정보 선택 버튼 텍스트
 export const InfoSelectBtnText = styled.div({
   fontSize: 16,
+  color: "#1E1E1E",
   fontFamily: "Inter",
-  fontWeight: "500",
   wordWrap: "break-word",
 });
 
@@ -141,7 +163,7 @@ export const SubmitBtn = styled.button({
   paddingRight: 91,
   paddingTop: 8,
   paddingBottom: 8,
-  background: "#4753FF",
+  background: "#4D956D",
   borderRadius: 10,
   border: "1.12px #787878 solid",
   justifyContent: "center",

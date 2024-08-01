@@ -281,15 +281,15 @@ export const CanAnswerText2 = styled.div({
 });
 
 export const ChevronRight = styled.div({
-  width: 24,
-  height: 24,
+  width: 15,
+  height: 15,
   position: "relative",
 });
 
 export const Icon = styled.img({
   width: 20,
-  left: 4,
-  top: 1,
+  left: -3,
+  top: -3,
   position: "absolute",
 });
 

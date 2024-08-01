@@ -42,6 +42,7 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Loading from "../../component/Loading";
 import Login from "../../component/Login";
+import { BackBtn } from "../../component/Chat/ChatStyle";
 
 // 고지서 텍스트 추출한 거 가져오기
 const getBillImgToJson = async (userObj, setBillPrice) => {
@@ -75,12 +76,19 @@ function MyPage() {
   }
 
   return (
-    <ContainerStyle>
+    <ContainerStyle
+      style={{
+        background:
+          "linear-gradient(180deg, #FFF4E1 0%, rgba(70.50, 190.33, 127.35, 0.21) 100%)",
+      }}
+    >
+      <BackBtn
+        style={{ marginTop: 10 }}
+        src={process.env.PUBLIC_URL + `/assets/backBtn.svg`}
+        onClick={() => nav("/")}
+      ></BackBtn>
       <MyPageWrap>
-        <Login onClick={() => nav("/")} />
-        <Header>
-          <button onClick={() => nav("/")}>뒤로가기</button>
-        </Header>
+        <Header></Header>
         <MyProfileWrap>
           <MyProfileImg src={userObj?.photoURL} />
           <MyProfileNameWrap>
@@ -99,10 +107,10 @@ function MyPage() {
                 <OneBillBackground>
                   <OneBillContentWrap>
                     <OneBillName>전기</OneBillName>
-                    <OneBillImg src="https://via.placeholder.com/29x29" />
-                    <OneBillPrice>
-                      {billPrice && billPrice.billImgToJson.청구금액}
-                    </OneBillPrice>
+                    <OneBillImg
+                      src={process.env.PUBLIC_URL + "/assets/elecImg.svg"}
+                    />
+                    <OneBillPrice>33,472원</OneBillPrice>
                   </OneBillContentWrap>
                 </OneBillBackground>
               </OneBillWrap>
@@ -110,7 +118,9 @@ function MyPage() {
                 <OneBillBackground>
                   <OneBillContentWrap>
                     <OneBillName>가스</OneBillName>
-                    <OneBillImg src="https://via.placeholder.com/29x29" />
+                    <OneBillImg
+                      src={process.env.PUBLIC_URL + "/assets/gasImg.svg"}
+                    />
                     <OneBillPrice>33,472원</OneBillPrice>
                   </OneBillContentWrap>
                 </OneBillBackground>
@@ -119,7 +129,9 @@ function MyPage() {
                 <OneBillBackground>
                   <OneBillContentWrap>
                     <OneBillName>수도</OneBillName>
-                    <OneBillImg src="https://via.placeholder.com/29x29" />
+                    <OneBillImg
+                      src={process.env.PUBLIC_URL + "/assets/waterImg.svg"}
+                    />
                     <OneBillPrice>33,472원</OneBillPrice>
                   </OneBillContentWrap>
                 </OneBillBackground>
@@ -209,6 +221,7 @@ function MyPage() {
             </GraphBackground>
           </GraphWrap>
         </MonthBillWrap>
+        <Login onClick={() => nav("/")} />
       </MyPageWrap>
     </ContainerStyle>
   );

@@ -73,8 +73,8 @@ function Main() {
             <SelectBillWrap>
               <SelectBillTextWrap>
                 <SelectBillText>
-                  안녕하세요, 홍길동님! 원하는 서비스를 선택하시면 채팅을
-                  시작하실 수 있어요. 무엇을 도와드릴까요?
+                  안녕하세요, {data?.displayName}님! 원하는 서비스를 선택하시면
+                  채팅을 시작하실 수 있어요. 무엇을 도와드릴까요?
                 </SelectBillText>
               </SelectBillTextWrap>
               <SelectBillBtnWrap>

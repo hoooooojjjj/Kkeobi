@@ -88,7 +88,18 @@ function Login({ isChatRoomExpanded }) {
   }
 
   return data ? (
-    <button onClick={handleLogout}>로그아웃</button>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+      <button
+        style={{
+          border: "none",
+          background: "none",
+          textDecoration: "underline",
+        }}
+        onClick={handleLogout}
+      >
+        로그아웃
+      </button>
+    </div>
   ) : isLoading ? (
     <div
       style={{

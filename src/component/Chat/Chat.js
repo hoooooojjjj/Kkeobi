@@ -196,7 +196,8 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
         <HeaderTitle>
           1:1 채팅
           <HeaderTitleImg
-            src={process.env.PUBLIC_URL + `/assets/elecImg.svg`}
+            style={{ marginLeft: 8 }}
+            src={process.env.PUBLIC_URL + `/assets/${ChatNavigation}.svg`}
           />
         </HeaderTitle>
       </Header>

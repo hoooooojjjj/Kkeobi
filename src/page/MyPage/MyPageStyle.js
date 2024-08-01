@@ -6,7 +6,7 @@ export const Header = styled.header({
 
 export const MyPageWrap = styled.div({
   width: 375,
-  height: 600,
+  height: 700,
   overflowY: "auto",
   msOverflowStyle: "none" /* Internet Explorer */,
   scrollbarWidth: "none" /* Firefox */,
@@ -105,7 +105,7 @@ export const OneBillBackground = styled.div({
   background: "white",
   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   borderRadius: 17,
-  justifyContent: "flex-start",
+  justifyContent: "center",
   alignItems: "center",
   display: "flex",
 });
@@ -233,7 +233,7 @@ export const OneGraphBar = styled.div({
 export const OneGraphBarPercent = styled.div((props) => ({
   width: 27.08,
   height: props.percent,
-  background: "#4753FF",
+  background: "#FEC9B9",
   borderRadius: 2.76,
 }));
 
@@ -278,7 +278,7 @@ export const GraphExpainDetailBtn = styled.button({
   width: 183.32,
   height: 31.34,
   padding: 10,
-  background: "#D5E5FF",
+  background: "#FEC9B9",
   borderRadius: 5,
   justifyContent: "center",
   alignItems: "center",
@@ -288,7 +288,7 @@ export const GraphExpainDetailBtn = styled.button({
 });
 
 export const GraphExpainDetailBtnText = styled.div({
-  color: "#4753FF",
+  color: "black",
   fontSize: 14,
   fontFamily: "Inter",
   fontWeight: "700",

@@ -14,7 +14,7 @@ import {
   BackBtn,
   PendingAnswer,
   OneChatWrap,
-} from "../../page/main/MainStyle";
+} from "./ChatStyle";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Spin } from "antd";

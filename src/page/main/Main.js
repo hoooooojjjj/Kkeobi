@@ -5,7 +5,6 @@ import Login from "../../component/Login";
 import { userObjContext } from "../../App";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
-import Chat from "../../component/Chat/Chat";
 
 function Main() {
   const nav = useNavigate();
@@ -44,18 +43,12 @@ function Main() {
           내 장독대 관리하기
         </GoMyPageBtn>
       </Header>
-      <Chat
-        isChatRoomExpanded={isChatRoomExpanded}
-        setIsChatRoomExpanded={setIsChatRoomExpanded}
-        hidden={hidden}
-        setHidden={setHidden}
-      />
+
       <Login isChatRoomExpanded={isChatRoomExpanded} />
     </ContainerStyle>
   ) : (
     <ContainerStyle>
       <Header></Header>
-      {/* <ChatComponent /> */}
       <Login />
     </ContainerStyle>
   );

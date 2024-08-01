@@ -83,7 +83,7 @@ function Login({ isChatRoomExpanded }) {
   ) : (
     <GoogleLoginImg
       onClick={handleGoogleLogin}
-      src={process.env.PUBLIC_URL + `/assets/google.png`}
+      src={process.env.PUBLIC_URL + `assets/google.png`}
       alt="구글 로그인"
     />
   );

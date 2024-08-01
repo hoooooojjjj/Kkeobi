@@ -4,7 +4,7 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import axios from "axios";
 import { useContext } from "react";
 import { userObjContext } from "../../../App";
-import { QuestionBtn, StyledLabel } from "../../../page/main/MainStyle";
+import { QuestionBtn, StyledLabel } from "./ChatStyle";
 
 // 사용자 정보 가져오기
 const getUserInfo = async (userObj) => {

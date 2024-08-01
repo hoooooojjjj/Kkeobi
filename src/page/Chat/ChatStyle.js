@@ -1,26 +1,44 @@
-import Styled from "@emotion/styled";
+import styled from "@emotion/styled";
 
+// 헤더
+export const Header = styled.header({
+  width: 371,
+  height: 43,
+  background: "#4D956D",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+export const HeaderTitle = styled.div({
+  display: "flex",
+});
+
+export const HeaderTitleImg = styled.img({
+  width: 18,
+  height: 18,
+});
+
+// 뒤로가기 버튼
+export const BackBtn = styled.img({
+  cursor: "pointer",
+  position: "absolute",
+  left: 10,
+  background: "transparent",
+  border: "none",
+  outline: "none",
+});
 // 메인
-export const Mains = Styled.main((props) => ({
-  width: 375,
-  height: props.isChatRoomExpanded ? 600 : 380,
+export const Mains = styled.main(() => ({
+  width: 371,
   overflowY: "auto",
   boxSizing: "border-box",
-  paddingLeft: 15,
-  paddingRight: 15,
-  paddingTop: 52,
-  paddingBottom: 52,
-  background: "white",
-  boxShadow: "0px -1px 10.199999809265137px rgba(0, 0, 0, 0.25)",
-  borderRadius: 31,
   justifyContent: "flex-start",
   alignItems: "flex-start",
   gap: 10,
   display: "inline-flex",
   flexDirection: "column",
   position: "relative",
-  transition: "height 0.5s ease-in-out", // Add transition property for smooth animation
-  paddingBottom: props.isChatRoomExpanded ? 80 : 20,
 }));
 
 // 메인 내 채팅방
@@ -112,14 +130,6 @@ export const MainLogo = styled.img({
   top: -40,
   left: 110,
 });
-
-export const BackBtn = styled.button((props) => ({
-  display: props.hidden ? "block" : "none",
-  transition: "display 0.5s ease-in-out",
-  position: "absolute",
-  top: 10,
-  left: 20,
-}));
 
 export const PendingAnswer = styled.div`
   z-index: 100;

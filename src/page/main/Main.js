@@ -95,7 +95,7 @@ function Main() {
               </SelectBillText>
             </SelectBillTextWrap>
             <SelectBillBtnWrap>
-              <SelectBillBtn>
+              <SelectBillBtn onClick={() => nav("/chat/electricity")}>
                 <SelectBillBtnTextWrap>
                   <SelectBillBtnText>전기</SelectBillBtnText>
                   <SelectBillBtnImg
@@ -103,7 +103,7 @@ function Main() {
                   />
                 </SelectBillBtnTextWrap>
               </SelectBillBtn>
-              <SelectBillBtn>
+              <SelectBillBtn onClick={() => nav("/chat/gas")}>
                 <SelectBillBtnTextWrap>
                   <SelectBillBtnText>가스</SelectBillBtnText>
                   <SelectBillBtnImg
@@ -111,7 +111,7 @@ function Main() {
                   />
                 </SelectBillBtnTextWrap>
               </SelectBillBtn>
-              <SelectBillBtn>
+              <SelectBillBtn onClick={() => nav("/chat/water")}>
                 <SelectBillBtnTextWrap>
                   <SelectBillBtnText>수도</SelectBillBtnText>
                   <SelectBillBtnImg
@@ -308,6 +308,7 @@ function Main() {
           </div>
         </div>
       </div>
+      <Login />
     </ContainerStyle>
   ) : (
     <ContainerStyle

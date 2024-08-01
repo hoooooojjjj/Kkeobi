@@ -6,7 +6,7 @@ import {
   SendMessageBtn,
   MessageInputWrap,
   StyledLabel,
-} from "./ChatStyle";
+} from "../ChatStyle";
 import { useContext, useState } from "react";
 import { userObjContext } from "../../../App";
 

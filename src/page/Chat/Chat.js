@@ -14,12 +14,17 @@ import {
   BackBtn,
   PendingAnswer,
   OneChatWrap,
+  Header,
+  HeaderTitle,
+  HeaderTitleImg,
 } from "./ChatStyle";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Spin } from "antd";
 import SendMessage from "./Chating/SendMessage";
 import CreateThread from "./Chating/CreateThread";
+import { ContainerStyle } from "../../containerStyle";
+import { useNavigate } from "react-router-dom";
 
 // 채팅 기록 가져오는 함수
 const getChatLog = async (userObj) => {
@@ -55,6 +60,7 @@ const insertChatLog = async ({ userObj, contents }) => {
 };
 
 const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
+  const nav = useNavigate();
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
 
@@ -106,12 +112,21 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
   }
 
   return (
-    <>
+    <ContainerStyle>
+      <Header>
+        <BackBtn
+          src={process.env.PUBLIC_URL + `/assets/backBtn.svg`}
+          onClick={() => nav("/")}
+        ></BackBtn>
+        <HeaderTitle>
+          1:1 채팅
+          <HeaderTitleImg
+            src={process.env.PUBLIC_URL + `/assets/elecImg.svg`}
+          />
+        </HeaderTitle>
+      </Header>
       <Mains isChatRoomExpanded={isChatRoomExpanded}>
         <MainLogo src={process.env.PUBLIC_URL + `/assets/Logo.png`} />
-        <BackBtn hidden={hidden} onClick={() => setIsChatRoomExpanded(false)}>
-          뒤로가기
-        </BackBtn>
         <ChatRoom>
           <FirstChatWrap>
             <FirstChat>안녕하세요, 꺼비입니다! 무엇을 도와드릴까요?</FirstChat>
@@ -188,7 +203,7 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
       ) : (
         <></>
       )}
-    </>
+    </ContainerStyle>
   );
 };
 

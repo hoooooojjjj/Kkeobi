@@ -124,9 +124,9 @@ export const KkeobiChatWrap = styled.div({
 export const KkeobiChat = styled.div({
   maxWidth: 250,
   color: "black",
-  fontSize: 15,
+  fontSize: 16,
   fontFamily: "Inter",
-  fontWeight: "400",
+
   wordWrap: "break-word",
 });
 

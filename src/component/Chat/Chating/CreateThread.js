@@ -126,14 +126,11 @@ const CreateThread = ({
 
     try {
       // '/chat/billImg' 엔드포인트로 POST 요청(이미지 URL 전송 후 대화 스레드 생성)
-      const response = await axios.post(
-        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat/billImg",
-        {
-          imageUrl: url,
-          userInfo: userInfo,
-          ChatNavigation: ChatNavigation,
-        }
-      );
+      const response = await axios.post("http://localhost:8080/chat/billImg", {
+        imageUrl: url,
+        userInfo: userInfo,
+        ChatNavigation: ChatNavigation,
+      });
 
       // '/chat/billImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
       updateThreadID(userObj, response.data.thread);

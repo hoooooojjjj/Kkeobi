@@ -63,7 +63,11 @@ function Main() {
             alignItems: "flex-start",
           }}
         >
-          <HeaderLogoText>꺼비</HeaderLogoText>
+          <img
+            style={{ marginLeft: 5, marginTop: 5 }}
+            src={process.env.PUBLIC_URL + "/assets/LogoText.svg"}
+          />
+          {/* <HeaderLogoText>꺼비</HeaderLogoText> */}
         </Header>
         <MainBackground>
           <MainLogo
@@ -210,9 +214,11 @@ function Main() {
                   alignSelf: "stretch",
                   height: 20,
                   color: "black",
-                  fontSize: 15,
+                  fontSize: 20,
+                  fontFamily: "NEXON Lv1 Gothic OTF",
+                  fontWeight: "700",
                   fontFamily: "Inter",
-                  fontWeight: "600",
+                  marginBottom: 10,
                   wordWrap: "break-word",
                 }}
               >
@@ -245,59 +251,9 @@ function Main() {
             >
               <img
                 className="Subtract"
-                style={{ width: 69.91, height: 34.5, borderRadius: 0.25 }}
-                src="https://via.placeholder.com/70x34"
+                style={{ width: 80, height: 40, borderRadius: 0.25 }}
+                src={process.env.PUBLIC_URL + `/assets/goMy.svg`}
               />
-              <div
-                className="HomeDuotone"
-                style={{ width: 35.77, height: 35.3, position: "relative" }}
-              >
-                <div
-                  className="Rectangle4127"
-                  style={{
-                    width: 20.86,
-                    height: 20.59,
-                    left: 7.45,
-                    top: 10.3,
-                    position: "absolute",
-                    background: "rgba(125.99, 134.42, 158.31, 0.25)",
-                  }}
-                ></div>
-                <div
-                  className="Rectangle4128"
-                  style={{
-                    width: 26.83,
-                    height: 13.24,
-                    left: 4.47,
-                    top: 5.88,
-                    position: "absolute",
-                    background: "#FEFEE4",
-                  }}
-                ></div>
-                <div
-                  className="Vector3"
-                  style={{
-                    width: 7.45,
-                    height: 8.83,
-                    left: 14.16,
-                    top: 22.06,
-                    position: "absolute",
-                    background: "#FEFEE4",
-                  }}
-                ></div>
-                <div
-                  className="Rectangle4129"
-                  style={{
-                    width: 2.98,
-                    height: 5.88,
-                    left: 23.85,
-                    top: 7.35,
-                    position: "absolute",
-                    background: "#FEFEE4",
-                    borderRadius: 0.5,
-                  }}
-                />
-              </div>
             </div>
           </div>
         </div>

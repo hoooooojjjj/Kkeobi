@@ -118,7 +118,8 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
 
   // 자주 하는 질문 클릭 여부
   const [isFrequentlyAskedQuestion, setIsFrequentlyAskedQuestion] = useState({
-    isClick: false,
+    isClickFirst: false,
+    isClickAfter: false,
     askMessage: "",
   });
 
@@ -211,7 +212,9 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
               안녕하세요! 고지서를 보내거나 질문을 시작해주세요😚
             </FirstChat>
           </FirstChatWrap>
-          {isFirstChat ? (
+          {data?.content?.length > 0 ? (
+            <></>
+          ) : (
             <MyChatWrap style={{ display: "flex", flexDirection: "column" }}>
               <CreateThread
                 setIsAnswerPending={setIsAnswerPending}
@@ -225,7 +228,7 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
                 onClick={() =>
                   setIsFrequentlyAskedQuestion({
                     ...isFrequentlyAskedQuestion,
-                    isClick: !isFrequentlyAskedQuestion.isClick,
+                    isClickFirst: !isFrequentlyAskedQuestion.isClickFirst,
                   })
                 }
                 style={{ background: "#4D956D" }}
@@ -252,11 +255,9 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
                 </OpenBillAnalTextWrap>
               </OpenBillAnalBtn>
             </MyChatWrap>
-          ) : (
-            <></>
           )}
 
-          {isFrequentlyAskedQuestion.isClick ? (
+          {isFrequentlyAskedQuestion.isClickFirst ? (
             <div
               className="Frame85"
               style={{
@@ -462,54 +463,59 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
             <></>
           )}
         </ChatRoom>
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            position: "fixed",
-            bottom: 120,
-          }}
-        >
-          {" "}
-          <CreateThread
-            setIsAnswerPending={setIsAnswerPending}
-            mutation={mutation}
-            setimgFile={setimgFile}
-            data={data}
-            ChatNavigation={ChatNavigation}
-            setIsFirstChat={setIsFirstChat}
-          />
-          <OpenBillAnalBtn
-            style={{ background: "#4D956D" }}
-            onClick={() =>
-              setIsFrequentlyAskedQuestion({
-                ...isFrequentlyAskedQuestion,
-                isClick: !isFrequentlyAskedQuestion.isClick,
-              })
-            }
+        {data?.content?.length > 0 ? (
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              position: "fixed",
+              bottom: 120,
+            }}
           >
-            <OpenBillAnalTextWrap>
-              <div style={{ width: 25, height: 25, position: "relative" }}>
-                <img
-                  src={
-                    process.env.PUBLIC_URL + "/assets/help-circle-contained.svg"
-                  }
-                  style={{
-                    width: 19.79,
-                    height: 18.68,
-                    left: 3.13,
-                    top: 3.12,
-                    position: "absolute",
-                  }}
-                ></img>
-              </div>
-              <OpenBillAnalText style={{ color: "#FFFFFF" }}>
-                자주 묻는 질문
-              </OpenBillAnalText>
-            </OpenBillAnalTextWrap>
-          </OpenBillAnalBtn>
-        </div>
-        {isFrequentlyAskedQuestion.isClick ? (
+            {" "}
+            <CreateThread
+              setIsAnswerPending={setIsAnswerPending}
+              mutation={mutation}
+              setimgFile={setimgFile}
+              data={data}
+              ChatNavigation={ChatNavigation}
+              setIsFirstChat={setIsFirstChat}
+            />
+            <OpenBillAnalBtn
+              style={{ background: "#4D956D" }}
+              onClick={() =>
+                setIsFrequentlyAskedQuestion({
+                  ...isFrequentlyAskedQuestion,
+                  isClickAfter: !isFrequentlyAskedQuestion.isClickAfter,
+                })
+              }
+            >
+              <OpenBillAnalTextWrap>
+                <div style={{ width: 25, height: 25, position: "relative" }}>
+                  <img
+                    src={
+                      process.env.PUBLIC_URL +
+                      "/assets/help-circle-contained.svg"
+                    }
+                    style={{
+                      width: 19.79,
+                      height: 18.68,
+                      left: 3.13,
+                      top: 3.12,
+                      position: "absolute",
+                    }}
+                  ></img>
+                </div>
+                <OpenBillAnalText style={{ color: "#FFFFFF" }}>
+                  자주 묻는 질문
+                </OpenBillAnalText>
+              </OpenBillAnalTextWrap>
+            </OpenBillAnalBtn>
+          </div>
+        ) : (
+          <></>
+        )}
+        {isFrequentlyAskedQuestion.isClickAfter ? (
           <div
             className="Frame85"
             style={{

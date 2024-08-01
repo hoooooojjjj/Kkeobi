@@ -4,7 +4,13 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import axios from "axios";
 import { useContext } from "react";
 import { userObjContext } from "../../../App";
-import { QuestionBtn, StyledLabel } from "../ChatStyle";
+import {
+  OpenBillAnalBtn,
+  OpenBillAnalText,
+  OpenBillAnalTextWrap,
+  QuestionBtn,
+  StyledLabel,
+} from "../ChatStyle";
 
 // 사용자 정보 가져오기
 const getUserInfo = async (userObj) => {
@@ -71,7 +77,6 @@ const CreateThread = ({
 }) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
-  console.log(userObj);
 
   // 고지서 분석 이미지 파일 string으로 저장(렌더링을 위해)
   const handleFileSave = (file) => {
@@ -141,63 +146,55 @@ const CreateThread = ({
     }
   };
 
-  // 메인 페이지에서 대화 스레드 생성
-  const handleCreateThreadWithoutImg = async () => {
-    // 답변 대기 시작
-    setIsAnswerPending(true);
-
-    // 사용자 정보 가져오기
-    const userInfo = await getUserInfo(userObj);
-
-    try {
-      // '/chat/noImg' 엔드포인트로 POST 요청(대화 스레드 생성)
-      const response = await axios.post("http://localhost:8080/chat/noImg", {
-        userInfo: userInfo,
-        ChatNavigation: ChatNavigation,
-      });
-
-      // '/chat/noImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
-      updateThreadID(userObj, response.data.thread);
-
-      const contents = {
-        question: null,
-        answer: "질문이 시작되었어요! 꺼비한테 무엇이든 질문해보세요",
-      };
-
-      // mutation으로 파이어스토어에 첫 답변 저장
-      mutation.mutate({ userObj, contents });
-
-      // 답변 대기 종료
-      setIsAnswerPending(false);
-    } catch (error) {
-      // 에러 발생 시 콘솔에 에러 출력
-      console.error("Failed to create thread : ", error);
-    }
-  };
-
   return (
-    <div>
-      <input
-        type="file"
-        id="billFile"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          handleCreateThreadbillImg(e);
-          handleFileSave(e.target.files[0]);
-        }}
-      />
-      <StyledLabel htmlFor="billFile">
-        고지서 분석으로 채팅 시작하기
-      </StyledLabel>
-      <QuestionBtn
-        onClick={() => {
-          handleCreateThreadWithoutImg();
-        }}
-      >
-        그냥 채팅 시작하기
-      </QuestionBtn>
-      {data && <QuestionBtn onClick={() => {}}>채팅 다시하기</QuestionBtn>}
-    </div>
+    <OpenBillAnalBtn>
+      <OpenBillAnalTextWrap>
+        <div style={{ width: 25, height: 25, position: "relative" }}>
+          <img
+            src={process.env.PUBLIC_URL + "/assets/image-add.svg"}
+            style={{
+              width: 19.79,
+              height: 18.68,
+              left: 3.13,
+              top: 3.12,
+              position: "absolute",
+            }}
+          ></img>
+        </div>
+        <input
+          type="file"
+          id="billFile"
+          style={{ display: "none" }}
+          onChange={(e) => {
+            handleCreateThreadbillImg(e);
+            handleFileSave(e.target.files[0]);
+          }}
+        />{" "}
+        <OpenBillAnalText htmlFor="billFile">고지서 보내기</OpenBillAnalText>
+      </OpenBillAnalTextWrap>
+    </OpenBillAnalBtn>
+    // <div>
+    // <input
+    //   type="file"
+    //   id="billFile"
+    //   style={{ display: "none" }}
+    //   onChange={(e) => {
+    //     handleCreateThreadbillImg(e);
+    //     handleFileSave(e.target.files[0]);
+    //   }}
+    // />
+    // <StyledLabel htmlFor="billFile">
+    //   고지서 분석으로 채팅 시작하기
+    // </StyledLabel>
+    //   <QuestionBtn
+    //     onClick={() => {
+    //       handleCreateThreadWithoutImg();
+    //     }}
+    //   >
+    //     그냥 채팅 시작하기
+    //   </QuestionBtn>
+    //   {data && <QuestionBtn onClick={() => {}}>채팅 다시하기</QuestionBtn>}
+    // </div>
   );
 };
 

@@ -50,7 +50,7 @@ const SendMessage = ({
       console.log("No thread available. Create a thread first.");
       return null;
     }
-
+    console.log(ChatNavigation);
     try {
       // '/chat/message' 엔드포인트로 POST 요청(이미지 URL, 메세지 내용, 스레드 id 전송 후 메세지 전송)
       const response = await axios.post("http://localhost:8080/chat/message", {

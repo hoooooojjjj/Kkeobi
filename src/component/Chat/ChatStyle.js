@@ -31,6 +31,7 @@ export const BackBtn = styled.img({
 // 메인
 export const Mains = styled.main(() => ({
   width: 371,
+  padding: 10,
   overflowY: "auto",
   boxSizing: "border-box",
   justifyContent: "flex-start",
@@ -53,8 +54,8 @@ export const ChatRoom = styled.div({
 export const FirstChatWrap = styled.div({
   width: "85%",
   padding: 11,
-  background: "#4753FF",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  background: "#FEC9B9",
+  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
@@ -66,7 +67,7 @@ export const FirstChatWrap = styled.div({
 
 // 메인 첫 채팅창
 export const FirstChat = styled.div({
-  color: "white",
+  // color: "white",
   fontSize: 15,
   fontFamily: "Inter",
   fontWeight: "400",
@@ -78,7 +79,7 @@ export const MyChatWrap = styled.div({
   alignSelf: "flex-end",
   padding: 11,
   background: "#F3F3F3",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
   borderBottomLeftRadius: 20,
@@ -102,8 +103,8 @@ export const MyChat = styled.div({
 export const KkeobiChatWrap = styled.div({
   alignSelf: "flex-start",
   padding: 11,
-  background: "#4753FF",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  background: "#FEC9B9",
+  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,
@@ -116,19 +117,28 @@ export const KkeobiChatWrap = styled.div({
 // 꺼비 채팅
 export const KkeobiChat = styled.div({
   maxWidth: 250,
-  color: "white",
+  color: "black",
   fontSize: 15,
   fontFamily: "Inter",
   fontWeight: "400",
   wordWrap: "break-word",
 });
 
+// 메인 로고 wrap
+export const MainLogoWrap = styled.div({
+  width: 40,
+  height: 40,
+  background: "#F3F3F3",
+  boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25) inset",
+  borderRadius: 9999,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  margin: "10px 0 0 0",
+});
 // 메인 로고
 export const MainLogo = styled.img({
-  width: 150,
-  position: "absolute",
-  top: -40,
-  left: 110,
+  width: 31,
 });
 
 export const PendingAnswer = styled.div`
@@ -261,4 +271,37 @@ export const SendMessageBtn = styled.button({
   fontWeight: "400",
   border: "none",
   outline: "none",
+});
+
+export const OpenBillAnalBtn = styled.div({
+  width: 112,
+  paddingLeft: 46,
+  paddingRight: 46,
+  paddingTop: 11,
+  paddingBottom: 11,
+  background: "#FEFEE4",
+  borderRadius: 15,
+  border: "1px #4D956D solid",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
+  gap: 10,
+  display: "inline-flex",
+});
+
+export const OpenBillAnalTextWrap = styled.div({
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 2,
+  display: "inline-flex",
+});
+
+export const OpenBillAnalText = styled.label({
+  paddingTop: 2,
+  textAlign: "center",
+  color: "#303030",
+  fontSize: 13,
+  fontFamily: "Inter",
+  fontWeight: "500",
+  wordWrap: "break-word",
 });

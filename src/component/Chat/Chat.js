@@ -17,6 +17,10 @@ import {
   Header,
   HeaderTitle,
   HeaderTitleImg,
+  MainLogoWrap,
+  OpenBillAnalBtn,
+  OpenBillAnalTextWrap,
+  OpenBillAnalText,
 } from "./ChatStyle";
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -25,6 +29,7 @@ import SendMessage from "./Chating/SendMessage";
 import CreateThread from "./Chating/CreateThread";
 import { ContainerStyle } from "../../containerStyle";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // 채팅 기록 가져오는 함수
 const getChatLog = async (userObj) => {
@@ -59,6 +64,39 @@ const insertChatLog = async ({ userObj, contents }) => {
   }
 };
 
+// thread id 업데이트
+const updateThreadID = async (userObj, threadID) => {
+  const threadIDRef = doc(db, "threadID", userObj.uid);
+
+  try {
+    // 문서가 존재하는지 확인
+    const docSnap = await getDoc(threadIDRef);
+    if (docSnap.exists()) {
+      // 문서가 존재하면 업데이트하여 threadID를 업데이트
+      await updateDoc(threadIDRef, {
+        threadID: threadID,
+      });
+    } else {
+      // 문서가 존재하지 않으면 새로운 문서를 생성하고 threadID를 저장
+      await setDoc(threadIDRef, { threadID: threadID });
+    }
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+};
+
+// 사용자 정보 가져오기
+const getUserInfo = async (userObj) => {
+  const docRef = doc(db, "userInfo", userObj.uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return null;
+  }
+};
+
 const Chat = ({ ChatNavigation, setChatNavigation }) => {
   const nav = useNavigate();
   // 유저 정보
@@ -72,6 +110,9 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
 
   // 현재 질문
   const [curContent, setCurContent] = useState("");
+
+  // 처음인지
+  const [ifFirst, setIfFirst] = useState(false);
 
   // 마지막 채팅 ref
   const chatEndRef = useRef(null);
@@ -101,6 +142,36 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // 메인 페이지에서 대화 스레드 생성
+  const handleCreateThreadWithoutImg = async () => {
+    // 답변 대기 시작
+    setIsAnswerPending(true);
+
+    // 사용자 정보 가져오기
+    const userInfo = await getUserInfo(userObj);
+
+    try {
+      // '/chat/noImg' 엔드포인트로 POST 요청(대화 스레드 생성)
+      const response = await axios.post("http://localhost:8080/chat/noImg", {
+        userInfo: userInfo,
+        ChatNavigation: ChatNavigation,
+      });
+
+      // '/chat/noImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
+      updateThreadID(userObj, response.data.thread);
+
+      // 답변 대기 종료
+      setIsAnswerPending(false);
+    } catch (error) {
+      // 에러 발생 시 콘솔에 에러 출력
+      console.error("Failed to create thread : ", error);
+    }
+  };
+
+  useEffect(() => {
+    handleCreateThreadWithoutImg();
+  }, [ChatNavigation]);
+
   useEffect(() => {
     scrollToBottom();
   }, [data, curContent]);
@@ -124,18 +195,49 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
         </HeaderTitle>
       </Header>
       <Mains>
-        <MainLogo src={process.env.PUBLIC_URL + `/assets/Logo.png`} />
+        <MainLogoWrap>
+          <MainLogo
+            src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.svg`}
+          />
+        </MainLogoWrap>
         <ChatRoom>
           <FirstChatWrap>
-            <FirstChat>안녕하세요, 꺼비입니다! 무엇을 도와드릴까요?</FirstChat>
+            <FirstChat>
+              안녕하세요! 고지서를 보내거나 질문을 시작해주세요😚
+            </FirstChat>
           </FirstChatWrap>
-          <CreateThread
-            setIsAnswerPending={setIsAnswerPending}
-            mutation={mutation}
-            setimgFile={setimgFile}
-            data={data}
-            ChatNavigation={ChatNavigation}
-          />
+          <MyChatWrap style={{ display: "flex", flexDirection: "column" }}>
+            <CreateThread
+              setIsAnswerPending={setIsAnswerPending}
+              mutation={mutation}
+              setimgFile={setimgFile}
+              data={data}
+              ChatNavigation={ChatNavigation}
+            />
+            <OpenBillAnalBtn style={{ background: "#4D956D" }}>
+              <OpenBillAnalTextWrap>
+                <div style={{ width: 25, height: 25, position: "relative" }}>
+                  <img
+                    src={
+                      process.env.PUBLIC_URL +
+                      "/assets/help-circle-contained.svg"
+                    }
+                    style={{
+                      width: 19.79,
+                      height: 18.68,
+                      left: 3.13,
+                      top: 3.12,
+                      position: "absolute",
+                    }}
+                  ></img>
+                </div>
+                <OpenBillAnalText style={{ color: "#FFFFFF" }}>
+                  자주 묻는 질문
+                </OpenBillAnalText>
+              </OpenBillAnalTextWrap>
+            </OpenBillAnalBtn>
+          </MyChatWrap>
+
           {isPending ? (
             <Spin />
           ) : (

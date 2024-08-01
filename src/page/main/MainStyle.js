@@ -24,6 +24,7 @@ export const MainBackground = styled.main({
   gap: 10,
   display: "inline-flex",
   position: "relative",
+  boxShadow: "0px 0px 10.199999809265137px rgba(0, 0, 0, 0.25)",
 });
 
 // 메인 로고 이미지
@@ -52,7 +53,7 @@ export const MainHello = styled.div({
   paddingTop: 9,
   paddingBottom: 9,
   background: "#FEC9B9",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+  boxShadow: "0px 1px 10px rgba(0, 0, 0, 0.25)",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
   borderBottomRightRadius: 20,

@@ -30,7 +30,8 @@ const SendMessage = ({ setCurContent, setIsAnswerPending, mutation }) => {
   const [content, setContent] = useState("");
 
   // 메세지 전송 시
-  const handleSendMessage = async () => {
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
     const curContent = content;
     setCurContent(content);
     setContent("");
@@ -80,7 +81,9 @@ const SendMessage = ({ setCurContent, setIsAnswerPending, mutation }) => {
         onChange={(e) => setContent(e.target.value)}
         placeholder="메세지를 입력하세요"
       ></MessageInput>
-      <SendMessageBtn onClick={handleSendMessage}>보내기</SendMessageBtn>
+      <SendMessageBtn onClick={(e) => handleSendMessage(e)}>
+        보내기
+      </SendMessageBtn>
     </MessageInputWrap>
   );
 };

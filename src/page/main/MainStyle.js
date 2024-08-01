@@ -159,7 +159,7 @@ export const BillAnalysisBtn = styled.button({});
 export const QuestionBtn = styled.button({});
 
 // 메시지 input wrap
-export const MessageInputWrap = styled.div({
+export const MessageInputWrap = styled.form({
   position: "absolute",
   left: 0,
   bottom: 0,

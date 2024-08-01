@@ -254,9 +254,30 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
                     )}
                   </MyChatWrap>
                 )}
-                <KkeobiChatWrap ref={chatEndRef}>
-                  <KkeobiChat>{Chat.answer}</KkeobiChat>
-                </KkeobiChatWrap>
+
+                {(Chat.isImg && Chat.answer.startsWith("[")) ||
+                Chat.answer.startsWith("`") ? (
+                  Chat.answer.startsWith("```json") &&
+                  Chat.answer.endsWith("```") ? (
+                    JSON.parse(
+                      Chat.answer.slice(7, Chat.answer.length - 3)
+                    ).map((answer, index) => (
+                      <KkeobiChatWrap key={index} ref={chatEndRef}>
+                        <KkeobiChat>{answer}</KkeobiChat>
+                      </KkeobiChatWrap>
+                    ))
+                  ) : (
+                    JSON.parse(Chat.answer).map((answer, index) => (
+                      <KkeobiChatWrap key={index} ref={chatEndRef}>
+                        <KkeobiChat>{answer}</KkeobiChat>
+                      </KkeobiChatWrap>
+                    ))
+                  )
+                ) : (
+                  <KkeobiChatWrap ref={chatEndRef}>
+                    <KkeobiChat>{Chat.answer}</KkeobiChat>
+                  </KkeobiChatWrap>
+                )}
               </OneChatWrap>
             ))
           )}
@@ -277,13 +298,15 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
                   </MyChatWrap>
                 )
               )}
-
               <KkeobiChatWrap ref={chatEndRef}>
-                <PendingAnswer answerLoaded={!isAnswerPending}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </PendingAnswer>
+                <KkeobiChat>
+                  {!curContent ? "꺼비가 고지서를 읽고 있어요!" : ""}
+                  <PendingAnswer answerLoaded={!isAnswerPending}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </PendingAnswer>
+                </KkeobiChat>
               </KkeobiChatWrap>
             </>
           ) : (

@@ -134,6 +134,7 @@ const CreateThread = ({
       const contents = {
         question: url,
         answer: response.data.response.answer,
+        isImg: true,
       };
 
       // mutation으로 파이어스토어에 질문과 답변 저장

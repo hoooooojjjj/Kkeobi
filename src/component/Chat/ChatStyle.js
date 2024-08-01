@@ -111,8 +111,8 @@ export const KkeobiChatWrap = styled.div({
   padding: 11,
   background: "#FEC9B9",
   boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.25)",
-  borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
+  borderBottomLeftRadius: 20,
   borderBottomRightRadius: 20,
   justifyContent: "center",
   alignItems: "flex-start",
@@ -168,17 +168,17 @@ export const PendingAnswer = styled.div`
   & > span:nth-of-type(0) {
     margin: 5px;
     animation-delay: 0s;
-    background-color: red;
+    background-color: black;
   }
   & > span:nth-of-type(1) {
     margin: 5px;
     animation-delay: 0.2s;
-    background-color: dodgerblue;
+    background-color: black;
   }
   & > span:nth-of-type(2) {
     margin: 5px;
     animation-delay: 0.4s;
-    background-color: greenyellow;
+    background-color: black;
   }
   transition: opacity 0.1s ease-in-out;
   ${(props) =>

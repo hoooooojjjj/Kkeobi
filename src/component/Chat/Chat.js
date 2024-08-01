@@ -111,8 +111,16 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
   // 현재 질문
   const [curContent, setCurContent] = useState("");
 
+  const [isFirstChat, setIsFirstChat] = useState(true);
+
   // 마지막 채팅 ref
   const chatEndRef = useRef(null);
+
+  // 자주 하는 질문 클릭 여부
+  const [isFrequentlyAskedQuestion, setIsFrequentlyAskedQuestion] = useState({
+    isClick: false,
+    askMessage: "",
+  });
 
   // 쿼리 클라이언트 가져오기
   const queryClient = useQueryClient();
@@ -203,38 +211,179 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
               안녕하세요! 고지서를 보내거나 질문을 시작해주세요😚
             </FirstChat>
           </FirstChatWrap>
-          <MyChatWrap style={{ display: "flex", flexDirection: "column" }}>
-            <CreateThread
-              setIsAnswerPending={setIsAnswerPending}
-              mutation={mutation}
-              setimgFile={setimgFile}
-              data={data}
-              ChatNavigation={ChatNavigation}
-            />
-            <OpenBillAnalBtn style={{ background: "#4D956D" }}>
-              <OpenBillAnalTextWrap>
-                <div style={{ width: 25, height: 25, position: "relative" }}>
-                  <img
-                    src={
-                      process.env.PUBLIC_URL +
-                      "/assets/help-circle-contained.svg"
-                    }
-                    style={{
-                      width: 19.79,
-                      height: 18.68,
-                      left: 3.13,
-                      top: 3.12,
-                      position: "absolute",
-                    }}
-                  ></img>
-                </div>
-                <OpenBillAnalText style={{ color: "#FFFFFF" }}>
-                  자주 묻는 질문
-                </OpenBillAnalText>
-              </OpenBillAnalTextWrap>
-            </OpenBillAnalBtn>
-          </MyChatWrap>
+          {isFirstChat ? (
+            <MyChatWrap style={{ display: "flex", flexDirection: "column" }}>
+              <CreateThread
+                setIsAnswerPending={setIsAnswerPending}
+                mutation={mutation}
+                setimgFile={setimgFile}
+                data={data}
+                ChatNavigation={ChatNavigation}
+                setIsFirstChat={setIsFirstChat}
+              />
+              <OpenBillAnalBtn
+                onClick={() =>
+                  setIsFrequentlyAskedQuestion({
+                    ...isFrequentlyAskedQuestion,
+                    isClick: !isFrequentlyAskedQuestion.isClick,
+                  })
+                }
+                style={{ background: "#4D956D" }}
+              >
+                <OpenBillAnalTextWrap>
+                  <div style={{ width: 25, height: 25, position: "relative" }}>
+                    <img
+                      src={
+                        process.env.PUBLIC_URL +
+                        "/assets/help-circle-contained.svg"
+                      }
+                      style={{
+                        width: 19.79,
+                        height: 18.68,
+                        left: 3.13,
+                        top: 3.12,
+                        position: "absolute",
+                      }}
+                    ></img>
+                  </div>
+                  <OpenBillAnalText style={{ color: "#FFFFFF" }}>
+                    자주 묻는 질문
+                  </OpenBillAnalText>
+                </OpenBillAnalTextWrap>
+              </OpenBillAnalBtn>
+            </MyChatWrap>
+          ) : (
+            <></>
+          )}
 
+          {isFrequentlyAskedQuestion.isClick ? (
+            <div
+              className="Frame85"
+              style={{
+                width: "100%",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+                gap: 5,
+                display: "inline-flex",
+                filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
+              }}
+            >
+              <div
+                onClick={() =>
+                  setIsFrequentlyAskedQuestion({
+                    ...isFrequentlyAskedQuestion,
+                    askMessage: "사용자 명의변경은 어떻게 하나요?",
+                  })
+                }
+                className="Frame82"
+                style={{
+                  cursor: "pointer",
+                  width: "65%",
+                  paddingTop: 11,
+                  paddingBottom: 11,
+                  background: "white",
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  borderBottomLeftRadius: 20,
+                  border: "1px #4D956D solid",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 10,
+                  display: "inline-flex",
+                }}
+              >
+                <div
+                  style={{
+                    textAlign: "center",
+                    color: "#5B5B5B",
+                    fontSize: 13,
+                    fontFamily: "Inter",
+                    fontWeight: "400",
+                    wordWrap: "break-word",
+                  }}
+                >
+                  사용자 명의변경은 어떻게 하나요?
+                </div>
+              </div>
+              <div
+                onClick={() =>
+                  setIsFrequentlyAskedQuestion({
+                    ...isFrequentlyAskedQuestion,
+                    askMessage: "자동이체 신청 및 해지는 어떻게 하나요?",
+                  })
+                }
+                className="Frame82"
+                style={{
+                  cursor: "pointer",
+                  width: "65%",
+                  paddingTop: 11,
+                  paddingBottom: 11,
+                  background: "white",
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  borderBottomLeftRadius: 20,
+                  border: "1px #4D956D solid",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 10,
+                  display: "inline-flex",
+                }}
+              >
+                <div
+                  style={{
+                    textAlign: "center",
+                    color: "#5B5B5B",
+                    fontSize: 13,
+                    fontFamily: "Inter",
+                    fontWeight: "400",
+                    wordWrap: "break-word",
+                  }}
+                >
+                  자동이체 신청 및 해지는 어떻게 하나요?
+                </div>
+              </div>
+              <div
+                onClick={() =>
+                  setIsFrequentlyAskedQuestion({
+                    ...isFrequentlyAskedQuestion,
+                    askMessage: "갑자기 전기요금이 많이 나와요",
+                  })
+                }
+                className="Frame82"
+                style={{
+                  cursor: "pointer",
+                  width: "65%",
+                  paddingTop: 11,
+                  paddingBottom: 11,
+                  background: "white",
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  borderBottomLeftRadius: 20,
+                  border: "1px #4D956D solid",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 10,
+                  display: "inline-flex",
+                }}
+              >
+                <div
+                  style={{
+                    textAlign: "center",
+                    color: "#5B5B5B",
+                    fontSize: 13,
+                    fontFamily: "Inter",
+                    fontWeight: "400",
+                    wordWrap: "break-word",
+                  }}
+                >
+                  갑자기 전기요금이 많이 나와요
+                </div>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
           {isPending ? (
             <Spin />
           ) : (
@@ -299,8 +448,8 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
                 )
               )}
               <KkeobiChatWrap ref={chatEndRef}>
-                <KkeobiChat>
-                  {!curContent ? "꺼비가 고지서를 읽고 있어요!" : ""}
+                <KkeobiChat style={{ display: "flex" }}>
+                  <div>{imgFile ? "꺼비가 고지서를 읽고 있어요!" : ""}</div>
                   <PendingAnswer answerLoaded={!isAnswerPending}>
                     <span></span>
                     <span></span>
@@ -313,12 +462,192 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
             <></>
           )}
         </ChatRoom>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            position: "fixed",
+            bottom: 120,
+          }}
+        >
+          {" "}
+          <CreateThread
+            setIsAnswerPending={setIsAnswerPending}
+            mutation={mutation}
+            setimgFile={setimgFile}
+            data={data}
+            ChatNavigation={ChatNavigation}
+            setIsFirstChat={setIsFirstChat}
+          />
+          <OpenBillAnalBtn
+            style={{ background: "#4D956D" }}
+            onClick={() =>
+              setIsFrequentlyAskedQuestion({
+                ...isFrequentlyAskedQuestion,
+                isClick: !isFrequentlyAskedQuestion.isClick,
+              })
+            }
+          >
+            <OpenBillAnalTextWrap>
+              <div style={{ width: 25, height: 25, position: "relative" }}>
+                <img
+                  src={
+                    process.env.PUBLIC_URL + "/assets/help-circle-contained.svg"
+                  }
+                  style={{
+                    width: 19.79,
+                    height: 18.68,
+                    left: 3.13,
+                    top: 3.12,
+                    position: "absolute",
+                  }}
+                ></img>
+              </div>
+              <OpenBillAnalText style={{ color: "#FFFFFF" }}>
+                자주 묻는 질문
+              </OpenBillAnalText>
+            </OpenBillAnalTextWrap>
+          </OpenBillAnalBtn>
+        </div>
+        {isFrequentlyAskedQuestion.isClick ? (
+          <div
+            className="Frame85"
+            style={{
+              position: "fixed",
+              bottom: 180,
+              left: 150,
+              width: "55%",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              alignItems: "flex-end",
+              gap: 5,
+              display: "inline-flex",
+              filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
+            }}
+          >
+            <div
+              onClick={() =>
+                setIsFrequentlyAskedQuestion({
+                  ...isFrequentlyAskedQuestion,
+                  askMessage: "사용자 명의변경은 어떻게 하나요?",
+                })
+              }
+              className="Frame82"
+              style={{
+                cursor: "pointer",
+                width: "65%",
+                paddingTop: 11,
+                paddingBottom: 11,
+                background: "white",
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                borderBottomLeftRadius: 20,
+                border: "1px #4D956D solid",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+                display: "inline-flex",
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#5B5B5B",
+                  fontSize: 13,
+                  fontFamily: "Inter",
+                  fontWeight: "400",
+                  wordWrap: "break-word",
+                }}
+              >
+                사용자 명의변경은 어떻게 하나요?
+              </div>
+            </div>
+            <div
+              onClick={() =>
+                setIsFrequentlyAskedQuestion({
+                  ...isFrequentlyAskedQuestion,
+                  askMessage: "자동이체 신청 및 해지는 어떻게 하나요?",
+                })
+              }
+              className="Frame82"
+              style={{
+                cursor: "pointer",
+                width: "65%",
+                paddingTop: 11,
+                paddingBottom: 11,
+                background: "white",
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                borderBottomLeftRadius: 20,
+                border: "1px #4D956D solid",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+                display: "inline-flex",
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#5B5B5B",
+                  fontSize: 13,
+                  fontFamily: "Inter",
+                  fontWeight: "400",
+                  wordWrap: "break-word",
+                }}
+              >
+                자동이체 신청 및 해지는 어떻게 하나요?
+              </div>
+            </div>
+            <div
+              onClick={() =>
+                setIsFrequentlyAskedQuestion({
+                  ...isFrequentlyAskedQuestion,
+                  askMessage: "갑자기 전기요금이 많이 나와요",
+                })
+              }
+              className="Frame82"
+              style={{
+                cursor: "pointer",
+                width: "65%",
+                paddingTop: 11,
+                paddingBottom: 11,
+                background: "white",
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                borderBottomLeftRadius: 20,
+                border: "1px #4D956D solid",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+                display: "inline-flex",
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#5B5B5B",
+                  fontSize: 13,
+                  fontFamily: "Inter",
+                  fontWeight: "400",
+                  wordWrap: "break-word",
+                }}
+              >
+                갑자기 전기요금이 많이 나와요
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </Mains>
       <SendMessage
         setCurContent={setCurContent}
         setIsAnswerPending={setIsAnswerPending}
         mutation={mutation}
         ChatNavigation={ChatNavigation}
+        isFrequentlyAskedQuestion={isFrequentlyAskedQuestion}
+        setIsFirstChat={setIsFirstChat}
       />
     </ContainerStyle>
   );

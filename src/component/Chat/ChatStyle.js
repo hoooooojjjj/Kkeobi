@@ -31,7 +31,7 @@ export const BackBtn = styled.img({
 // 메인
 export const Mains = styled.main(() => ({
   width: 371,
-  height: 600,
+  height: 555,
   padding: 10,
   overflowY: "auto",
   boxSizing: "border-box",
@@ -152,15 +152,15 @@ export const PendingAnswer = styled.div`
   z-index: 100;
   opacity: ${(props) => (props.answerLoaded ? 0 : 1)};
   inset: 0;
-  width: 100%;
-  margin-right: 10px;
+
+  margin-left: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   & > span {
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background-color: gray;
     border-radius: 50%;
     animation: loading 1s infinite linear;
@@ -284,9 +284,10 @@ export const SendMessageBtn = styled.button({
 });
 
 export const OpenBillAnalBtn = styled.div({
-  width: 112,
-  paddingLeft: 46,
-  paddingRight: 46,
+  marginRight: 10,
+  width: 132,
+  paddingLeft: 35,
+  paddingRight: 0,
   paddingTop: 11,
   paddingBottom: 11,
   background: "#FEFEE4",

@@ -78,6 +78,7 @@ const CreateThread = ({
   setimgFile,
   data,
   ChatNavigation,
+  setIsFirstChat,
 }) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
@@ -100,6 +101,10 @@ const CreateThread = ({
     if (!isCreateThread) {
       return null;
     }
+
+    setIsFirstChat(false);
+
+    handleFileSave(e.target.files[0]);
 
     // 답변 대기 시작
     setIsAnswerPending(true);
@@ -142,8 +147,6 @@ const CreateThread = ({
 
       // 답변 대기 종료
       setIsAnswerPending(false);
-
-      handleFileSave(e.target.files[0]);
 
       // 고지서 텍스트 추출한 json 파이어스토어에 저장
       saveBillImgToJson(userObj, response.data.billImgToJson, ChatNavigation);

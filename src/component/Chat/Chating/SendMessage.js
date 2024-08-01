@@ -7,7 +7,7 @@ import {
   MessageInputWrap,
   StyledLabel,
 } from "../ChatStyle";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { userObjContext } from "../../../App";
 
 // 이전 thread id 가져오기
@@ -27,19 +27,36 @@ const SendMessage = ({
   setIsAnswerPending,
   mutation,
   ChatNavigation,
+  isFrequentlyAskedQuestion,
+  setIsFirstChat,
 }) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
+
+  useEffect(() => {
+    console.log(isFrequentlyAskedQuestion);
+    if (isFrequentlyAskedQuestion?.askMessage) {
+      handleSendMessage(null, isFrequentlyAskedQuestion.askMessage);
+    }
+  }, [isFrequentlyAskedQuestion]);
 
   // 사용자가 입력한 메세지
   const [content, setContent] = useState("");
 
   // 메세지 전송 시
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    const curContent = content;
-    setCurContent(content);
-    setContent("");
+  const handleSendMessage = async (e, askMessage) => {
+    let curContent;
+    if (!askMessage) {
+      e.preventDefault();
+      curContent = content;
+      setCurContent(content);
+      setContent("");
+    } else {
+      curContent = askMessage;
+    }
+
+    setIsFirstChat(false);
+
     setIsAnswerPending(true);
 
     // 파이어스토어에 저장된 thread id 가져오기

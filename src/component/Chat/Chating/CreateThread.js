@@ -46,8 +46,12 @@ const updateThreadID = async (userObj, threadID) => {
 };
 
 // 파이어스토어에 고지서 텍스트 추출한거 저장
-const saveBillImgToJson = async (userObj, billImgToJson) => {
-  const billImgToJsonRef = doc(db, "billImgToJson", userObj.uid);
+const saveBillImgToJson = async (userObj, billImgToJson, ChatNavigation) => {
+  const billImgToJsonRef = doc(
+    db,
+    "billImgToJson" + ChatNavigation,
+    userObj.uid
+  );
 
   try {
     // 문서가 존재하는지 확인
@@ -133,13 +137,15 @@ const CreateThread = ({
       };
 
       // mutation으로 파이어스토어에 질문과 답변 저장
-      mutation.mutate({ userObj, contents });
+      mutation.mutate({ userObj, contents, ChatNavigation });
 
       // 답변 대기 종료
       setIsAnswerPending(false);
 
+      handleFileSave(e.target.files[0]);
+
       // 고지서 텍스트 추출한 json 파이어스토어에 저장
-      saveBillImgToJson(userObj, response.data.billImgToJson);
+      saveBillImgToJson(userObj, response.data.billImgToJson, ChatNavigation);
     } catch (error) {
       // 에러 발생 시 콘솔에 에러 출력
       console.error("Failed to create thread : ", error);
@@ -167,7 +173,6 @@ const CreateThread = ({
           style={{ display: "none" }}
           onChange={(e) => {
             handleCreateThreadbillImg(e);
-            handleFileSave(e.target.files[0]);
           }}
         />{" "}
         <OpenBillAnalText htmlFor="billFile">고지서 보내기</OpenBillAnalText>

@@ -32,8 +32,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // 채팅 기록 가져오는 함수
-const getChatLog = async (userObj) => {
-  const docRef = doc(db, "chatLog", userObj.uid);
+const getChatLog = async (userObj, ChatNavigation) => {
+  const docRef = doc(db, `chatLogWith${ChatNavigation}`, userObj.uid);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
@@ -44,8 +44,8 @@ const getChatLog = async (userObj) => {
 };
 
 // 채팅 기록 추가하는 함수
-const insertChatLog = async ({ userObj, contents }) => {
-  const chatLogRef = doc(db, "chatLog", userObj.uid);
+const insertChatLog = async ({ userObj, contents, ChatNavigation }) => {
+  const chatLogRef = doc(db, `chatLogWith${ChatNavigation}`, userObj.uid);
 
   try {
     // 문서가 존재하는지 확인
@@ -111,9 +111,6 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
   // 현재 질문
   const [curContent, setCurContent] = useState("");
 
-  // 처음인지
-  const [ifFirst, setIfFirst] = useState(false);
-
   // 마지막 채팅 ref
   const chatEndRef = useRef(null);
 
@@ -123,7 +120,7 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
   // 채팅 기록 가져오는 Query
   const { isPending, isError, data, error } = useQuery({
     queryKey: [userObj.uid + "'s chatLog"],
-    queryFn: () => getChatLog(userObj),
+    queryFn: () => getChatLog(userObj, ChatNavigation),
   });
 
   // 채팅 추가 시 채팅 기록 업데이트하는 Mutation
@@ -173,6 +170,7 @@ const Chat = ({ ChatNavigation, setChatNavigation }) => {
   }, [ChatNavigation]);
 
   useEffect(() => {
+    console.log(userObj);
     scrollToBottom();
   }, [data, curContent]);
 

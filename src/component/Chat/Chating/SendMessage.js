@@ -66,7 +66,7 @@ const SendMessage = ({
         answer: response.data.response.answer,
       };
 
-      mutation.mutate({ userObj, contents });
+      mutation.mutate({ userObj, contents, ChatNavigation });
 
       setIsAnswerPending(false);
     } catch (error) {
@@ -78,7 +78,9 @@ const SendMessage = ({
   return (
     <MessageInputWrap>
       <input type="file" id="file" style={{ display: "none" }} />
-      <StyledLabel htmlFor="file">+</StyledLabel>
+      <StyledLabel style={{ background: "#4D956D", width: 1 }} htmlFor="file">
+        +
+      </StyledLabel>
       <MessageInput
         value={content}
         onChange={(e) => setContent(e.target.value)}

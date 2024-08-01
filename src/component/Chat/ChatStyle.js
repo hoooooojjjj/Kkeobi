@@ -31,6 +31,7 @@ export const BackBtn = styled.img({
 // 메인
 export const Mains = styled.main(() => ({
   width: 371,
+  height: 600,
   padding: 10,
   overflowY: "auto",
   boxSizing: "border-box",
@@ -138,7 +139,8 @@ export const MainLogoWrap = styled.div({
 });
 // 메인 로고
 export const MainLogo = styled.img({
-  width: 31,
+  width: 41,
+  height: 41,
 });
 
 export const PendingAnswer = styled.div`
@@ -234,10 +236,13 @@ export const StyledLabel = styled.label`
 
 // 메시지 input wrap
 export const MessageInputWrap = styled.form({
+  borderBottomLeftRadius: 49,
+  borderBottomRightRadius: 49,
+  height: 78,
   position: "absolute",
   left: 0,
   bottom: 0,
-  backgroundColor: "lightGray",
+  backgroundColor: "#F3F3F3",
   padding: 5,
   width: "97%",
   justifyContent: "center",
@@ -260,9 +265,9 @@ export const MessageInput = styled.input({
 
 // 메시지 보내기 버튼
 export const SendMessageBtn = styled.button({
-  width: "30%",
+  width: "20%",
   marginLeft: 10,
-  background: "#4753FF",
+  background: "#4D956D",
   color: "white",
   borderRadius: 20,
   padding: 10,

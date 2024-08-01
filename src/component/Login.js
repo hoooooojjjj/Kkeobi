@@ -76,6 +76,7 @@ function Login({ isChatRoomExpanded }) {
         console.log("로그아웃 성공");
         // 로그아웃 성공 시 유저 정보 다시 fetch
         mutation.mutate();
+        nav("/");
       })
       .catch((error) => {
         // An error happened.

@@ -16,9 +16,9 @@ function Loading() {
       }}
     >
       <Pending>
-        <img src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.png`}></img>
-        <img src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.png`}></img>
-        <img src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.png`}></img>
+        <img src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.svg`}></img>
+        <img src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.svg`}></img>
+        <img src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.svg`}></img>
       </Pending>
       <PendingBar></PendingBar>
       <PendingText>로딩 중...</PendingText>

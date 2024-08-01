@@ -93,7 +93,7 @@ function UserInfo() {
       <Header>
         <HeaderLogoWrap>
           <HeaderLogo
-            src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.png`}
+            src={process.env.PUBLIC_URL + `/assets/BeforeLoginLogo.svg`}
           />
         </HeaderLogoWrap>
       </Header>

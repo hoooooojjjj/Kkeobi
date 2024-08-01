@@ -14,8 +14,8 @@ import {
 } from "./MainStyle";
 import Login from "../../component/Login";
 import { userObjContext } from "../../App";
-import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../component/Loading";
 
 function Main() {
   const nav = useNavigate();
@@ -40,11 +40,7 @@ function Main() {
   }, [isChatRoomExpanded]);
 
   if (isPending) {
-    return (
-      <ContainerStyle>
-        <Spin />
-      </ContainerStyle>
-    );
+    return <Loading />;
   }
   return data ? (
     <ContainerStyle

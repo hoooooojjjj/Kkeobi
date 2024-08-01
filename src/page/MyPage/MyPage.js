@@ -40,6 +40,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Loading from "../../component/Loading";
 
 // 고지서 텍스트 추출한 거 가져오기
 const getBillImgToJson = async (userObj, setBillPrice) => {
@@ -69,11 +70,7 @@ function MyPage() {
   }, [userObj]);
 
   if (isPending) {
-    return (
-      <ContainerStyle>
-        <Spin />
-      </ContainerStyle>
-    );
+    return <Loading />;
   }
 
   return (

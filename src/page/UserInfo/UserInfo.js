@@ -23,6 +23,7 @@ import { db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Spin } from "antd";
+import Loading from "../../component/Loading";
 
 function UserInfo() {
   const nav = useNavigate();
@@ -85,11 +86,7 @@ function UserInfo() {
   };
 
   if (isPending) {
-    return (
-      <ContainerStyle>
-        <Spin />
-      </ContainerStyle>
-    );
+    return <Loading />;
   }
   return (
     <ContainerStyle>

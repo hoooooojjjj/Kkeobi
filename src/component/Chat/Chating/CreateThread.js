@@ -66,11 +66,12 @@ const CreateThread = ({
   setIsAnswerPending,
   mutation,
   setimgFile,
-  setIsChatRoomExpanded,
   data,
+  ChatNavigation,
 }) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
+  console.log(userObj);
 
   // 고지서 분석 이미지 파일 string으로 저장(렌더링을 위해)
   const handleFileSave = (file) => {
@@ -114,6 +115,7 @@ const CreateThread = ({
       const response = await axios.post("http://localhost:8080/chat/billImg", {
         imageUrl: url,
         userInfo: userInfo,
+        ChatNavigation: ChatNavigation,
       });
 
       // '/chat/billImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
@@ -139,13 +141,8 @@ const CreateThread = ({
     }
   };
 
-  // 질문하기 버튼 클릭으로 대화 스레드 생성 시
+  // 메인 페이지에서 대화 스레드 생성
   const handleCreateThreadWithoutImg = async () => {
-    const isCreateThread = window.confirm("질문을 시작하시겠습니까?");
-    if (!isCreateThread) {
-      return null;
-    }
-
     // 답변 대기 시작
     setIsAnswerPending(true);
 
@@ -154,12 +151,10 @@ const CreateThread = ({
 
     try {
       // '/chat/noImg' 엔드포인트로 POST 요청(대화 스레드 생성)
-      const response = await axios.post(
-        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat/noImg",
-        {
-          userInfo: userInfo,
-        }
-      );
+      const response = await axios.post("http://localhost:8080/chat/noImg", {
+        userInfo: userInfo,
+        ChatNavigation: ChatNavigation,
+      });
 
       // '/chat/noImg' 요청에서 응답으로 받은 thread id 값을 파이어스토어에 저장
       updateThreadID(userObj, response.data.thread);
@@ -187,7 +182,6 @@ const CreateThread = ({
         id="billFile"
         style={{ display: "none" }}
         onChange={(e) => {
-          setIsChatRoomExpanded(true);
           handleCreateThreadbillImg(e);
           handleFileSave(e.target.files[0]);
         }}
@@ -197,21 +191,12 @@ const CreateThread = ({
       </StyledLabel>
       <QuestionBtn
         onClick={() => {
-          setIsChatRoomExpanded(true);
           handleCreateThreadWithoutImg();
         }}
       >
         그냥 채팅 시작하기
       </QuestionBtn>
-      {data && (
-        <QuestionBtn
-          onClick={() => {
-            setIsChatRoomExpanded(true);
-          }}
-        >
-          채팅 다시하기
-        </QuestionBtn>
-      )}
+      {data && <QuestionBtn onClick={() => {}}>채팅 다시하기</QuestionBtn>}
     </div>
   );
 };

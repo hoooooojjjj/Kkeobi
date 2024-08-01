@@ -22,7 +22,12 @@ const getThreadID = async (userObj) => {
   }
 };
 
-const SendMessage = ({ setCurContent, setIsAnswerPending, mutation }) => {
+const SendMessage = ({
+  setCurContent,
+  setIsAnswerPending,
+  mutation,
+  ChatNavigation,
+}) => {
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
 
@@ -48,14 +53,12 @@ const SendMessage = ({ setCurContent, setIsAnswerPending, mutation }) => {
 
     try {
       // '/chat/message' 엔드포인트로 POST 요청(이미지 URL, 메세지 내용, 스레드 id 전송 후 메세지 전송)
-      const response = await axios.post(
-        "https://grumpy-tara-kkeobi-d212fa6d.koyeb.app/chat/message",
-        {
-          // imageUrl,
-          content: curContent,
-          threadID: thread.threadID,
-        }
-      );
+      const response = await axios.post("http://localhost:8080/chat/message", {
+        // imageUrl,
+        content: curContent,
+        threadID: thread.threadID,
+        ChatNavigation: ChatNavigation,
+      });
 
       // '/chat/message' 요청에서 받은 질문, 답변을 상태에 저장
       const contents = {

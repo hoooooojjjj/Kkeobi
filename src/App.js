@@ -14,6 +14,7 @@ export const getUser = () => {
       auth,
       (user) => {
         unsubscribe();
+
         resolve(user);
       },
       reject

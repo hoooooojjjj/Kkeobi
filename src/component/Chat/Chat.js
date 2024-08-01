@@ -59,7 +59,7 @@ const insertChatLog = async ({ userObj, contents }) => {
   }
 };
 
-const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
+const Chat = ({ ChatNavigation, setChatNavigation }) => {
   const nav = useNavigate();
   // 유저 정보
   const { data: userObj } = useContext(userObjContext);
@@ -102,10 +102,8 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
   };
 
   useEffect(() => {
-    if (isChatRoomExpanded) {
-      scrollToBottom();
-    }
-  }, [data, curContent, isChatRoomExpanded]);
+    scrollToBottom();
+  }, [data, curContent]);
 
   if (isError) {
     return <div>{error.message}</div>;
@@ -116,7 +114,7 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
       <Header>
         <BackBtn
           src={process.env.PUBLIC_URL + `/assets/backBtn.svg`}
-          onClick={() => nav("/")}
+          onClick={() => setChatNavigation(null)}
         ></BackBtn>
         <HeaderTitle>
           1:1 채팅
@@ -125,7 +123,7 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
           />
         </HeaderTitle>
       </Header>
-      <Mains isChatRoomExpanded={isChatRoomExpanded}>
+      <Mains>
         <MainLogo src={process.env.PUBLIC_URL + `/assets/Logo.png`} />
         <ChatRoom>
           <FirstChatWrap>
@@ -135,8 +133,8 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
             setIsAnswerPending={setIsAnswerPending}
             mutation={mutation}
             setimgFile={setimgFile}
-            setIsChatRoomExpanded={setIsChatRoomExpanded}
             data={data}
+            ChatNavigation={ChatNavigation}
           />
           {isPending ? (
             <Spin />
@@ -194,15 +192,12 @@ const Chat = ({ isChatRoomExpanded, setIsChatRoomExpanded, hidden }) => {
           )}
         </ChatRoom>
       </Mains>
-      {isChatRoomExpanded ? (
-        <SendMessage
-          setCurContent={setCurContent}
-          setIsAnswerPending={setIsAnswerPending}
-          mutation={mutation}
-        />
-      ) : (
-        <></>
-      )}
+      <SendMessage
+        setCurContent={setCurContent}
+        setIsAnswerPending={setIsAnswerPending}
+        mutation={mutation}
+        ChatNavigation={ChatNavigation}
+      />
     </ContainerStyle>
   );
 };

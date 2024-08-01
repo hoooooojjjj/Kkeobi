@@ -41,6 +41,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Loading from "../../component/Loading";
+import Login from "../../component/Login";
 
 // 고지서 텍스트 추출한 거 가져오기
 const getBillImgToJson = async (userObj, setBillPrice) => {
@@ -76,14 +77,15 @@ function MyPage() {
   return (
     <ContainerStyle>
       <MyPageWrap>
+        <Login onClick={() => nav("/")} />
         <Header>
           <button onClick={() => nav("/")}>뒤로가기</button>
         </Header>
         <MyProfileWrap>
-          <MyProfileImg src={userObj.photoURL} />
+          <MyProfileImg src={userObj?.photoURL} />
           <MyProfileNameWrap>
             <MyProfileName Weight={600}>
-              {userObj.displayName}님의 장독대
+              {userObj?.displayName}님의 장독대
             </MyProfileName>
           </MyProfileNameWrap>
         </MyProfileWrap>
@@ -193,7 +195,7 @@ function MyPage() {
                     11%
                   </div> */}
                     <GraphExpainText>
-                      {userObj.displayName}님은 전년 동월보다 공과금을{" "}
+                      {userObj?.displayName}님은 전년 동월보다 공과금을{" "}
                       <strong>11%</strong> 더 많이 내고 있어요.
                     </GraphExpainText>
                   </GraphExpain>

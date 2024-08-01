@@ -1,13 +1,7 @@
 import styled from "@emotion/styled";
 
 // 헤더
-export const Header = styled.header`
-  display: flex;
-  visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
-  height: ${(props) => (props.isChatRoomExpanded ? 0 : 180)}px;
-  justify-content: space-evenly;
-  transition: height 0.5s ease-in-out;
-`;
+export const Header = styled.header``;
 
 // 로그인 전
 

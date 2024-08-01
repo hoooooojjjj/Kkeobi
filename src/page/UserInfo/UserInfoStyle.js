@@ -29,7 +29,7 @@ export const HeaderLogo = styled.img({
 
 // 채팅방
 export const ChatRoom = styled.div({
-  height: 470,
+  height: 630,
   padding: 10,
   display: "flex",
   flexDirection: "column",
@@ -67,11 +67,15 @@ export const ChatContentWrap = styled.div({
   alignItems: "center",
   gap: 8,
   display: "flex",
+  fontFamily: "Inter",
+  fontWeight: "500",
+  wordWrap: "break-word",
 });
 
 // 채팅 내용 텍스트
 export const ChatContentText = styled.p({
   fontSize: 16,
+  margin: 0,
   fontFamily: "Inter",
   fontWeight: "500",
   wordWrap: "break-word",

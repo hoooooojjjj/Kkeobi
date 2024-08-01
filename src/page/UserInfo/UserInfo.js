@@ -176,7 +176,13 @@ function UserInfo() {
               </InfoSelectBtnWrap>
             </ChatContentWrap>
           </ChatWrap>
-          <DetailStandard>자세한 기준 보기</DetailStandard>
+          <DetailStandard>
+            자세한 기준 보기
+            <img
+              style={{ width: 15 }}
+              src={process.env.PUBLIC_URL + "/assets/External.svg"}
+            />
+          </DetailStandard>
         </ChatBox>
         <ChatBox>
           <ChatWrap>
@@ -299,7 +305,13 @@ function UserInfo() {
               </InfoSelectBtnWrap>
             </ChatContentWrap>
           </ChatWrap>
-          <DetailStandard>자세한 기준 보기</DetailStandard>
+          <DetailStandard>
+            자세한 기준 보기{" "}
+            <img
+              style={{ width: 15 }}
+              src={process.env.PUBLIC_URL + "/assets/External.svg"}
+            />
+          </DetailStandard>
         </ChatBox>
         <SubmitBtn onClick={handleSubmitUserInfo}>
           <SubmitBtnText>제출하기</SubmitBtnText>

@@ -7,7 +7,6 @@ import {
   CanAnswerTextWrap,
   CanAnswerWrap,
   ChevronRight,
-  GoMyPageBtn,
   Header,
   HeaderLogoText,
   Icon,
@@ -15,7 +14,6 @@ import {
   LoginTextWrap,
   LoginWrap,
   MainBackground,
-  MainBackground2,
   MainHello,
   MainHelloText,
   MainLogo,
@@ -310,6 +308,14 @@ function Main() {
           </div>
         </div>
       </div>
+      <Login
+        style={{
+          alignSelf: "stretch",
+          height: 56,
+          background: "white",
+          borderRadius: 31,
+        }}
+      />
     </ContainerStyle>
   ) : (
     <ContainerStyle
